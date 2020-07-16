@@ -12,11 +12,11 @@ import logger from 'redux-logger';
  * If you need to store sensitive information, use redux-persist-sensitive-storage.
  * @see https://github.com/CodingZeal/redux-persist-sensitive-storage
  */
-import {AsyncStorage} from 'react-native';
+import storage from 'redux-persist/lib/storage'
 
 const persistConfig = {
   key: 'root',
-  storage: AsyncStorage,
+  storage: storage,
   /**
    * Blacklist state that we do not need/want to persist
    */

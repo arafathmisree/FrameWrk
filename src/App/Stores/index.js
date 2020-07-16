@@ -1,9 +1,9 @@
 import {combineReducers} from 'redux';
 import configureStore from './CreateStore';
 import rootSaga from '../Sagas/';
-import {AsyncStorage} from 'react-native';
-import {reducer as Startup} from './Invoice/Reducers';
-import {STARTUP} from './Invoice/Actions';
+import storage from 'redux-persist/lib/storage'
+import {reducer as Startup} from './Startup/Reducers'
+import {STARTUP} from './Startup/Actions';
 
 export default () => {
   const appReducer = combineReducers({
@@ -12,7 +12,7 @@ export default () => {
 
   const rootReducer = (state, action) => {
     if (action.type === STARTUP.LOG_OUT) {
-      AsyncStorage.removeItem('persist:root');
+      storage.removeItem('persist:root');
 
       state = undefined;
     }
