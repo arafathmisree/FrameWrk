@@ -2,7 +2,8 @@ import {applyMiddleware, compose, createStore} from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import {persistReducer, persistStore} from 'redux-persist';
 import logger from 'redux-logger';
-
+import  {PersistConfig} from '../Config'
+ 
 /**
  * This import defaults to localStorage for web and AsyncStorage for react-native.
  *
@@ -12,16 +13,9 @@ import logger from 'redux-logger';
  * If you need to store sensitive information, use redux-persist-sensitive-storage.
  * @see https://github.com/CodingZeal/redux-persist-sensitive-storage
  */
-import storage from 'redux-persist/lib/storage'
 
-const persistConfig = {
-  key: 'root',
-  storage: storage,
-  /**
-   * Blacklist state that we do not need/want to persist
-   */
-  blacklist: ['invoice'],
-};
+
+const persistConfig = PersistConfig
 
 export default (rootReducer, rootSaga) => {
   const middleware = [];
