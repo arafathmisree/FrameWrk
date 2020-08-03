@@ -6,6 +6,8 @@ import {
   Link
 } from "react-router-dom";
 
+import Home from '../Containers/Home'
+
 // This site has 3 pages, all of which are rendered
 // dynamically in the browser (not server rendered).
 //
@@ -59,13 +61,6 @@ export default function Routes() {
 // You can think of these components as "pages"
 // in your app.
 
-function Home() {
-  return (
-    <div>
-      <h2>Home</h2>
-    </div>
-  );
-}
 
 function About() {
   return (
