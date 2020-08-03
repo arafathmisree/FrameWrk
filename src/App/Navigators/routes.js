@@ -1,12 +1,8 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-import Home from '../Containers/Home'
+import Home from "../Containers/Home";
+import Login from "../Containers/Login";
 
 // This site has 3 pages, all of which are rendered
 // dynamically in the browser (not server rendered).
@@ -21,18 +17,6 @@ export default function Routes() {
   return (
     <Router>
       <div>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/about">About</Link>
-          </li>
-          <li>
-            <Link to="/dashboard">Dashboard</Link>
-          </li>
-        </ul>
-
         <hr />
 
         {/*
@@ -44,13 +28,16 @@ export default function Routes() {
         */}
         <Switch>
           <Route exact path="/">
-            <Home />
+            <Login />
           </Route>
           <Route path="/about">
             <About />
           </Route>
           <Route path="/dashboard">
             <Dashboard />
+          </Route>
+          <Route path="/home">
+            <Home />
           </Route>
         </Switch>
       </div>
@@ -60,7 +47,6 @@ export default function Routes() {
 
 // You can think of these components as "pages"
 // in your app.
-
 
 function About() {
   return (
@@ -73,7 +59,18 @@ function About() {
 function Dashboard() {
   return (
     <div>
-      <h2>Dashboard</h2>
+      <ul>
+        <li>
+          <Link to="/about">About</Link>
+        </li>
+        <li>
+          <Link to="/dashboard">Dashboard</Link>
+        </li>
+        <li>
+          <Link to="/home">home</Link>
+        </li>
+      </ul>
+      <h2>Welcome to Dashboard</h2>
     </div>
   );
 }
