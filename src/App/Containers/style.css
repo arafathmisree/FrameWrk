@@ -1,0 +1,49 @@
+.center {
+    width: 400px;
+    height: 300px;
+    position: absolute;
+    left: 50%;
+    top: 50%; 
+    margin-left: -150px;
+    margin-top: -150px;
+ }
+
+ .input1{
+     margin-bottom: 10px;
+ }
+
+ .input2{
+    margin-bottom: 10px;
+}
+
+.wrapperButton{
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  -ms-box-orient: horizontal;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: flex;
+  
+}
+
+
+.button1{
+
+}
+.button2{
+    margin-left: 10px;
+}
+
+.button3{
+    margin-left: 10px; 
+}
+
+
+
+.buttonGoogle{
+    height: 20px;
+}
