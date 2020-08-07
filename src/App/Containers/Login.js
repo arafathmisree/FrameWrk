@@ -86,9 +86,9 @@ function Login(props) {
   return (
     <div>
 
-       <Card>
+       <Card >
         
-      <div className="center">
+      <div id="animm" className="center">
       <div className="marginCenter">
       <div className="textfieldWrap">
         <h2>Log-In</h2>
