@@ -13,6 +13,7 @@ import StartupActions from "../Stores/Startup/Actions";
 import "./style.css";
 
 import {Button} from "../Components/Button";
+import {Card} from "../Components/Card";
 
 import {Textfield} from "../Components/Textfield";
 import { validateEmail } from "../Utils/Validations";
@@ -84,14 +85,18 @@ function Login(props) {
 
   return (
     <div>
+
+       <Card>
+        
       <div className="center">
+      <div className="marginCenter">
       <div className="textfieldWrap">
         <h2>Log-In</h2>
       
-        <Textfield placeholder="username"    onChange={handleChange} className="input1"></Textfield>
+        <Textfield placeholder="username"  onChange={handleChange} className="input1"></Textfield>
         <Textfield  placeholder="password" onChange={handleChangePassword} className="input2"></Textfield>
 
-        <div className="input1"> <Button onClick={gotToSignUp} type="primary" className="w-48">Dont have an account?</Button></div>
+        <div className="buttonMargin"> <Button onClick={gotToSignUp} type="primary" className="w-48">Dont have an account?</Button></div>
         </div>
         <div className="wrapperButton">
           <div className="button1" >
@@ -121,8 +126,11 @@ function Login(props) {
         </div>
      
     
-     
+        </div>
       </div>
+         
+          </Card>
+      
     </div>
   );
 }
