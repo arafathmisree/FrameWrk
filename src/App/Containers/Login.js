@@ -107,7 +107,7 @@ function Login(props) {
             </div>
 
             <div className="text-center my-4">
-              <Typography color="primary" type="body1">or login using</Typography>
+              <Typography color="primary" type="body1">or sign up using</Typography>
             </div>
 
             <div className="flex justify-around">
