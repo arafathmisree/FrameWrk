@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import SocialButton from "../Components/socialLogin/";
+import SocialButton from "../Components/atoms/socialLogin/";
 
 import { GoogleLogin } from "react-google-login";
 
@@ -12,11 +12,11 @@ import StartupActions from "../Stores/Startup/Actions";
 
 import "../assets/styles/main.css";
 
-import { Button } from "../Components/Button";
-import { Card } from "../Components/Card";
-import {Typography} from "../Components/Typography";
+import { Button } from "../Components/atoms/Button";
+import { Card } from "../Components/atoms/Card";
+import {Typography} from "../Components/atoms/Typography";
 
-import { Textfield } from "../Components/Textfield";
+import { Textfield } from "../Components/atoms/Textfield";
 import { validateEmail } from "../Utils/Validations";
 
 function Login(props) {
@@ -107,7 +107,7 @@ function Login(props) {
             </div>
 
             <div className="text-center my-4">
-              <Typography color="primary" type="body1">or sign up using</Typography>
+              <Typography color="primary" type="body1">or sign using</Typography>
             </div>
 
             <div className="flex justify-around">
@@ -122,10 +122,12 @@ function Login(props) {
 
                 <GoogleLogin
                   clientId="648513583046-6ingms3kmgge2nng0tq4tfdjnn51eug2.apps.googleusercontent.com"
+                  render={renderProps => (
+                    <Button type="outline" onClick={renderProps.onClick} disabled={renderProps.disabled}>Google</Button>
+                  )}
                   buttonText="Login"
                   onSuccess={responseGoogle}
                   onFailure={responseGoogle}
-                  className="buttonGoogle"
                   cookiePolicy={"single_host_origin"}
                 />
             </div>
