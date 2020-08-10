@@ -1,4 +1,4 @@
-import React,{ useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import SocialButton from "../Components/socialLogin/";
 
@@ -10,12 +10,13 @@ import { connect } from "react-redux";
 
 import StartupActions from "../Stores/Startup/Actions";
 
-import "./style.css";
+import "../assets/styles/main.css";
 
-import {Button} from "../Components/Button";
-import {Card} from "../Components/Card";
+import { Button } from "../Components/Button";
+import { Card } from "../Components/Card";
+import {Typography} from "../Components/Typography";
 
-import {Textfield} from "../Components/Textfield";
+import { Textfield } from "../Components/Textfield";
 import { validateEmail } from "../Utils/Validations";
 
 function Login(props) {
@@ -50,87 +51,89 @@ function Login(props) {
     console.log(response);
   };
 
-  const handleChange = (e) =>{
+  const handleChange = (e) => {
     setUsername(e.target.value)
     setEmailValid(validateEmail(username))
- 
+
   }
 
-  const handleChangePassword = (e) =>{
+  const handleChangePassword = (e) => {
     setPassword(e.target.value)
-    if(password > 6) {
+    if (password > 6) {
       passwordValid(true)
-    }else{
+    } else {
       passwordValid(false)
     }
   }
 
 
-  const login = () =>{
-    if(pass && emailValid){
+  const login = () => {
+    if (pass && emailValid) {
       alert('valid')
-    }else {
+    } else {
       alert('invalid')
     }
-  
- 
+
+
   }
 
 
-  const gotToSignUp = () =>{
-   
-   history.push("/signUp");
- 
+  const gotToSignUp = () => {
+
+    history.push("/signUp");
+
   }
 
   return (
     <div>
 
-       <Card >
-        
-      <div id="animm" className="center">
-      <div className="marginCenter">
-      <div className="textfieldWrap">
-        <h2>Log-In</h2>
-      
-        <Textfield placeholder="username"  onChange={handleChange} className="input1"></Textfield>
-        <Textfield  placeholder="password" onChange={handleChangePassword} className="input2"></Textfield>
+      <div className="flex justify-center">
+      <Card type="primary" size="small">
 
-        <div className="buttonMargin"> <Button onClick={gotToSignUp} type="primary" className="w-48">Dont have an account?</Button></div>
-        </div>
-        <div className="wrapperButton">
-          <div className="button1" >
-            <SocialButton
-              provider="facebook"
-              appId="420968585473340"
-              onLoginSuccess={handleSocialLogin}
-              onLoginFailure={handleSocialLoginFailure}
-            >
-              Login with Facebook
-            </SocialButton>
-          </div>
+        <div id="animm">
 
-          <div className="button2">
-            <GoogleLogin
-              clientId="648513583046-6ingms3kmgge2nng0tq4tfdjnn51eug2.apps.googleusercontent.com"
-              buttonText="Login"
-              onSuccess={responseGoogle}
-              onFailure={responseGoogle}
-              className="buttonGoogle"
-              cookiePolicy={"single_host_origin"}
-            />
-          </div>
-          <div className="button3">
-        <Button onClick={login} type="primary" className="w-48">sign-In</Button>
+            <div>
+              <Typography color="primary" type="h1">Log in to your account</Typography>
+
+              <Textfield placeholder="username" onChange={handleChange}></Textfield>
+              <Textfield placeholder="password" onChange={handleChangePassword}></Textfield>
+            </div>
+
+
+
+            <div className="flex justify-between"> 
+              <Button onClick={gotToSignUp} type="outline" className="mr-2">Dont have an account?</Button>
+              <Button onClick={login} type="primary" className="ml-2">Sign in</Button>
+            </div>
+
+            <div className="text-center my-4">
+              <Typography color="primary" type="body1">or login using</Typography>
+            </div>
+
+            <div className="flex justify-around">
+                <SocialButton
+                  provider="facebook"
+                  appId="420968585473340"
+                  onLoginSuccess={handleSocialLogin}
+                  onLoginFailure={handleSocialLoginFailure}
+                >
+                  Login with Facebook
+              </SocialButton>
+
+                <GoogleLogin
+                  clientId="648513583046-6ingms3kmgge2nng0tq4tfdjnn51eug2.apps.googleusercontent.com"
+                  buttonText="Login"
+                  onSuccess={responseGoogle}
+                  onFailure={responseGoogle}
+                  className="buttonGoogle"
+                  cookiePolicy={"single_host_origin"}
+                />
+            </div>
         </div>
-        </div>
-     
-    
-        </div>
-      </div>
-         
-          </Card>
-      
+
+      </Card>
+
+    </div>
     </div>
   );
 }

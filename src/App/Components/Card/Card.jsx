@@ -1,8 +1,13 @@
 import React from "react";
 
-const Card = (props) => (
-  <div style={{ borderWidth: "3px", color: "black", width: "30%" }}>
-    {props.children}
-  </div>
-);
+import {CardType, CardSize} from './CardStyles';
+
+function Card({size, type, children, className}) {
+
+  return (
+    <card className={`${CardType[type]} ${CardSize[size]} ${className}`}>
+      {children}
+    </card>
+  )
+}
 export default Card;

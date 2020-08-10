@@ -1,11 +1,11 @@
-  
 export const ButtonType = {
-    primary: "bg-primary hover:bg-teal-500 text-white font-bold rounded",
-    secondary: "bg-gray-600 hover:bg-gray-500 text-white font-bold rounded",
-    danger: "bg-red-600 hover:bg-red-500 text-white font-bold rounded",
-    success: "bg-green-600 hover:bg-green-500 text-white font-bold rounded",
-    warning: "bg-yellow-600 hover:bg-yellow-500 text-white font-bold rounded",
-    info: "bg-blue-600 hover:bg-blue-500 text-white font-bold rounded",
+    primary: "bg-primary hover:opacity-75 text-white font-bold rounded",
+    secondary: "bg-secondary hover:opacity-75 text-white font-bold rounded",
+    success: "bg-success hover:opacity-75 text-white font-bold rounded",
+    danger: "bg-danger hover:opacity-75 text-white font-bold rounded",
+    warning: "bg-warning hover:opacity-75 text-white font-bold rounded",
+    info: "bg-info hover:opacity-75 text-white font-bold rounded",
+    dark: "bg-dark hover:opacity-75 text-white font-bold rounded",
     link: "text-black-700 font-bold hover:underline",
     outline: "border text-black font-bold rounded hover:underline"
 };
