@@ -10,7 +10,7 @@ import { connect } from "react-redux";
 
 import StartupActions from "../Stores/Startup/Actions";
 
-import "../Assets/styles/main.css";
+import "../assets/styles/main.css";
 
 import { Button } from "../Components/atoms/Button";
 import { Card } from "../Components/atoms/Card";
