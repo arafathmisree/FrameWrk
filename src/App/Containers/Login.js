@@ -87,7 +87,7 @@ function Login(props) {
   return (
     <div>
 
-      <div className="flex justify-center">
+      <div className="flex justify-center p-8 md:pt-24">
       <Card type="primary" size="small">
 
         <div id="animm">
@@ -101,7 +101,7 @@ function Login(props) {
 
 
 
-            <div className="flex justify-between"> 
+            <div className="flex justify-between mt-4"> 
               <Button onClick={gotToSignUp} type="outline" className="mr-2">Dont have an account?</Button>
               <Button onClick={login} type="primary" className="ml-2">Sign in</Button>
             </div>
