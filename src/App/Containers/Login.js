@@ -22,6 +22,8 @@ import { validateEmail } from "../Utils/Validations";
 function Login(props) {
   const history = useHistory();
 
+
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [emailValid, setEmailValid] = useState(false);
@@ -96,8 +98,16 @@ function Login(props) {
             <Typography color="primary" type="h1">Log in to your account</Typography>
 
             <div className="mt-4">
-              <Textfield placeholder="username" onChange={handleChange}></Textfield>
-              <Textfield placeholder="password" onChange={handleChangePassword}></Textfield>
+              <Textfield
+               type="primary"
+              size="sm"
+              label="Title goes here"
+               placeholder="username" onChange={handleChange}></Textfield>
+              <Textfield 
+               type="primary"
+              size="sm"
+              label="Title goes here"
+              placeholder="password" onChange={handleChangePassword}></Textfield>
             </div>
 
 
