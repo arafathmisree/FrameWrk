@@ -92,38 +92,39 @@ function Login(props) {
 
         <div id="animm">
 
-            <div>
-              <Typography color="primary" type="h1">Log in to your account</Typography>
 
+            <Typography color="primary" type="h1">Log in to your account</Typography>
+
+            <div className="mt-4">
               <Textfield placeholder="username" onChange={handleChange}></Textfield>
               <Textfield placeholder="password" onChange={handleChangePassword}></Textfield>
             </div>
 
 
 
-            <div className="flex justify-between mt-4"> 
-              <Button onClick={gotToSignUp} type="outline" className="mr-2">Dont have an account?</Button>
-              <Button onClick={login} type="primary" className="ml-2">Sign in</Button>
+            <div className="flex mt-4"> 
+              <Button onClick={login} type="primary" className="mr-2">Sign in</Button>
+              <Button onClick={gotToSignUp} type="outline" className="ml-2">Dont have an account?</Button>
             </div>
 
             <div className="text-center my-4">
               <Typography color="primary" type="body1">or sign using</Typography>
             </div>
 
-            <div className="flex justify-around">
+            <div className="flex">
                 <SocialButton
                   provider="facebook"
                   appId="420968585473340"
                   onLoginSuccess={handleSocialLogin}
                   onLoginFailure={handleSocialLoginFailure}
                 >
-                  Login with Facebook
+                  Facebook
               </SocialButton>
 
                 <GoogleLogin
                   clientId="648513583046-6ingms3kmgge2nng0tq4tfdjnn51eug2.apps.googleusercontent.com"
                   render={renderProps => (
-                    <Button type="outline" onClick={renderProps.onClick} disabled={renderProps.disabled}>Google</Button>
+                    <Button type="outline" className="mx-4" onClick={renderProps.onClick} disabled={renderProps.disabled}>Google</Button>
                   )}
                   buttonText="Login"
                   onSuccess={responseGoogle}
