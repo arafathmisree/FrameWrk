@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Home from "../Containers/Home";
 import Login from "../Containers/Login";
 import SignUp from "../Containers/SignUp";
+import Profile from "../Containers/Profile";
 
 // This site has 3 pages, all of which are rendered
 // dynamically in the browser (not server rendered).
@@ -33,6 +34,9 @@ export default function Routes() {
           </Route>
           <Route exact path="/signUp">
             <SignUp />
+          </Route>
+          <Route exact path="/profile">
+            <Profile />
           </Route>
           <Route path="/about">
             <About />
