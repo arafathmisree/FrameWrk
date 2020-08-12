@@ -117,7 +117,7 @@ function SignUp(props) {
     <div>
       <div className="flex justify-center p-8 md:pt-24">
         <Card type="primary" size="small">
-          <Typography color="primary" type="h1">
+          <Typography color="primary" type="h1" className="flex justify-center">
             Sign up form
           </Typography>
 
@@ -142,6 +142,8 @@ function SignUp(props) {
               }
               placeholder="Full Name"
             ></Textfield>
+            </div>
+            <div className="mt-4">
             <Textfield
               type={
                 formState[1].valid == null
@@ -162,6 +164,8 @@ function SignUp(props) {
               }
               placeholder="Mobile"
             ></Textfield>
+            </div>
+            <div className="mt-4">
             <Textfield
               type={
                 formState[4].valid == null
@@ -182,6 +186,8 @@ function SignUp(props) {
               }
               placeholder="Email"
             ></Textfield>
+            </div>
+            <div className="mt-4">
             <Textfield
               type={
                 formState[2].valid == null
@@ -202,6 +208,8 @@ function SignUp(props) {
               }
               placeholder="Password"
             ></Textfield>
+            </div>
+            <div className="mt-4">
             <Textfield
             type={
                 formState[3].valid == null
