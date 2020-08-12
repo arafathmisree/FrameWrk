@@ -90,7 +90,7 @@ function Login(props) {
       <div className="flex justify-center p-8 md:pt-24">
         <Card type="primary" size="small">
           <div id="animm">
-            <Typography color="primary" type="h1">
+            <Typography color="primary" type="h1" className="flex justify-center">
               Log in to your account
             </Typography>
 
@@ -111,6 +111,8 @@ function Login(props) {
                 placeholder="username"
                 onChange={handleChange}
               ></Textfield>
+              </div>
+              <div className="mt-4">
               <Textfield
                 type={pass == null ? "primary" : pass ? "green" : "red"}
                 size="sm"
