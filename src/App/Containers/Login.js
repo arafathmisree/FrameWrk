@@ -43,8 +43,12 @@ function Login(props) {
 
   const responseGoogle = (response) => {
     if (response.accessToken) {
-      props.setUserData(response);
-      history.push("/dashboard");
+   
+      var payload = {
+        idToken : response.tokenId
+      }
+      props.signInGoogle(payload)
+   
     } else {
       alert("login error");
     }
@@ -177,5 +181,6 @@ const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch) => ({
   setUserData: (user) => dispatch(StartupActions.setUserData(user)),
+  signInGoogle: (token) => dispatch(StartupActions.signInGoogle(token)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

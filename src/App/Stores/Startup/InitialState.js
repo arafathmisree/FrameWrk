@@ -3,5 +3,6 @@
  */
 export const INITIAL_STATE = {
   data: [],
-  user : {}
+  user : {},
+  error : ''
 };

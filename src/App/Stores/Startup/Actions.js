@@ -4,7 +4,11 @@ import {createActions} from 'reduxsauce';
 
 const {Types, Creators} = createActions({
   loadData: null,
-  setUserData : ['user']
+  setUserData : ['user'],
+  signInGoogle : ['token'],
+  signInGoogleSuccess : ['data'],
+  signInGoogleFailure : ['error'],
+  signUpGoogle : ['token']
 });
 
 export const STARTUP = Types;
