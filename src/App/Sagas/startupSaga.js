@@ -9,6 +9,7 @@ export function* startup(api, action) {
 }
 
 export function* signInGoogle(api, action) {
+    console.log('acc',action)
     const response = yield call(api.googleSignIn,action.token);
 
     console.log(response)
