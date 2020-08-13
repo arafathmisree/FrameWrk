@@ -8,7 +8,7 @@ const routes = [
     auth: false,
     roles: [],
     exact: true,
-    component: Home
+    component: Login
   },
   {
     path: '/about',
