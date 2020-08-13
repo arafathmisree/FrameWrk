@@ -4,7 +4,8 @@ import {createActions} from 'reduxsauce';
 
 const {Types, Creators} = createActions({
   loadData: null,
-  setUserData : ['user']
+  setUserData : ['user'],
+  setRole : ['role']
 });
 
 export const STARTUP = Types;

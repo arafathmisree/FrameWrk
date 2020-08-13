@@ -18,7 +18,13 @@ export const setUserData = (state,{ user }) => ({
 });
 
 
+export const setRole = (state,{ role }) => ({
+  ...state,
+  role
+});
+
 export const reducer = createReducer(INITIAL_STATE, {
   [STARTUP.LOAD_DATA]: loadData,
   [STARTUP.SET_USER_DATA]: setUserData,
+  [STARTUP.SET_ROLE]: setRole,
 });

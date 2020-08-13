@@ -4,12 +4,13 @@ import SocialButton from "../Components/socialLogin/";
 
 import { GoogleLogin } from "react-google-login";
 
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 
 import { connect } from 'react-redux';
 
 import StartupActions from '../Stores/Startup/Actions'
 
+import { Button } from '../Components/Button'
 
 function Login(props) {
 
@@ -44,6 +45,20 @@ function Login(props) {
     console.log(response);
   };
 
+  const handleRoleLogin = (param) => {
+
+    props.setRole(param.role)
+
+    if (param.role == 'admin'){
+          history.push("/admin");
+    } else if (param.role == 'user'){
+          history.push("/user");
+    } else {
+          history.push("/error");
+    }
+    
+  }
+
   return (
     <div>
       <h2>Log-In</h2>
@@ -69,6 +84,10 @@ function Login(props) {
         />
         
       </div>
+      <div> 
+        <Button  onClick={() => handleRoleLogin({role : 'admin'})} text="Admin" variant="primary" />
+        <Button  onClick={() => handleRoleLogin({role : 'user'})} text="User" variant="secondary" />
+      </div>
     </div>
   );
 }
@@ -79,5 +98,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     setUserData:  (user) => dispatch(StartupActions.setUserData(user)),
+    setRole: (role) => dispatch(StartupActions.setRole(role))
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Login)
