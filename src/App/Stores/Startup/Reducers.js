@@ -17,6 +17,22 @@ export const setUserData = (state,{ user }) => ({
    user
 });
 
+export const signInGoogle = (state,{ token }) => ({
+  ...state,
+
+});
+
+export const signUpGoogle = (state,{ token }) => ({
+  ...state,
+});
+
+export const signInGoogleSuccess = (state,{ data }) => ({
+  ...state,
+});
+
+export const signInGoogleFailure = (state,{ error }) => ({
+  ...state,
+});
 
 export const setRole = (state,{ role }) => ({
   ...state,
@@ -27,4 +43,8 @@ export const reducer = createReducer(INITIAL_STATE, {
   [STARTUP.LOAD_DATA]: loadData,
   [STARTUP.SET_USER_DATA]: setUserData,
   [STARTUP.SET_ROLE]: setRole,
+  [STARTUP.SIGN_IN_GOOGLE]: signInGoogle,
+  [STARTUP.SIGN_IN_GOOGLE_SUCCESS]: signInGoogleSuccess,
+  [STARTUP.SIGN_IN_GOOGLE_FAILURE]: signInGoogleFailure,
+  [STARTUP.SIGN_UP_GOOGLE]: signUpGoogle,
 });

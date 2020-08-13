@@ -16,11 +16,21 @@ const create = (baseURL = NetworkConstants.BASE_URL) => {
     // here are some default headers
     headers: {
       "Cache-Control": "no-cache",
+      "Content-Type": "application/json;charset=UTF-8",
+      "Accept": "application/json;charset=UTF-8",
     },
     // 10 second timeout...
     timeout: 10000,
   });
 
+
+  const googleSignIn = (obj) => {
+    return api.post(NetworkConstants.AUTH_SERVICE + NetworkConstants.API + NetworkConstants.ACTION_GOOGLE + NetworkConstants.CONTROLLER_SIGNIN, obj);
+  };
+
+  const googleSignUp = (obj) => {
+    return api.post(NetworkConstants.AUTH_SERVICE + NetworkConstants.API + NetworkConstants.ACTION_GOOGLE + NetworkConstants.CONTROLLER_SIGNUP, obj);
+  };
   // ------
   // STEP 2
   // ------
@@ -49,6 +59,8 @@ const create = (baseURL = NetworkConstants.BASE_URL) => {
   // private scoped goodies in JavaScript.
   //
   return {
+    googleSignIn,
+    googleSignUp,
     // a list of the API functions from step 2
   };
 };

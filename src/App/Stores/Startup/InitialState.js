@@ -4,5 +4,6 @@
 export const INITIAL_STATE = {
   data: [],
   user : {},
-  role : ''
+  role : '',
+  error : ''
 };
