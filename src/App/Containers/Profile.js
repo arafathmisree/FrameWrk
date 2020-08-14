@@ -11,9 +11,29 @@ import { Textfield } from "../Components/atoms/Textfield";
 import { ImageComponent } from "../Components/atoms/ImageComponent";
 
 function Profile() {
-  //Set Uploaded Picture
-  function onDrop(file) {
-    setPicture(URL.createObjectURL(file[0]));
+  function readFile(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+
+      // Read the image via FileReader API and save image result in state.
+      reader.onload = function (e) {
+        // Add the file name to the data URL
+        let dataURL = e.target.result;
+        dataURL = dataURL.replace(";base64", `;name=${file.name};base64`);
+        setPicture(dataURL);
+        resolve({ file, dataURL });
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function onDropFile(e) {
+    const files = e.target.files;
+    // Iterate over all uploaded files
+    for (let i = 0; i < files.length; i++) {
+      let file = files[i];
+      readFile(file);
+    }
   }
 
   //Default Picture
@@ -38,16 +58,10 @@ function Profile() {
             <ImageComponent image={picture} />
           </div>
           <div>
-            <ImageUploader
-              withIcon={true}
-              onChange={onDrop}
-              imgExtension={[".jpg", ".gif", ".png", ".gif"]}
-              maxFileSize={5242880}
-              buttonText={"Change Picture"}
-              label={""}
-              singleImage={true}
-              withIcon={false}
-            />
+            <label for="file-upload" class="custom-file-upload">
+              <i class="fa fa-cloud-upload"></i> Custom Upload
+            </label>
+            <input id="file-upload" type="file" onChange={onDropFile} />
           </div>
           <div className="mt-4">
             <Textfield label="First name"></Textfield>
