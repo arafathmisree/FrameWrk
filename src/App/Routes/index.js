@@ -9,8 +9,10 @@ import routes, { User , Admin } from './routes'
 import PrivateRoute from './Private'
 import PublicRoute from './Public'
 import NavBar from '../Navigators/NavBar'
+import { HistoryWrapper } from '../Navigators/HostoryWrapper'
 
 const history = createBrowserHistory()
+HistoryWrapper.init(history)
 
 const Routes = (props) => (
   <Router hisotry={history}>

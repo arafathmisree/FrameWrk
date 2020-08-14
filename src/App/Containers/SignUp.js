@@ -13,6 +13,11 @@ import SocialButton from "../Components/atoms/socialLogin/";
 import { GoogleLogin } from "react-google-login";
 
 import { useHistory } from "react-router-dom";
+
+import { connect } from "react-redux";
+
+import StartupActions from "../Stores/Startup/Actions";
+
 import {
   validateFullName,
   validatePhoneNumber,
@@ -77,7 +82,20 @@ function SignUp(props) {
 
   const handleSocialLoginFailure = (err) => {};
 
-  const responseGoogle = (response) => {};
+  const responseGoogle = (response) => {
+    if (response.accessToken) {
+   
+      var payload = {
+        idToken : response.tokenId
+      }
+      props.signUp(payload)
+   
+    } else {
+      alert("login error");
+    }
+    console.log(response);
+   
+  };
 
   const handleChange = (id, e) => {
     formState.find((element) => {
@@ -109,6 +127,10 @@ function SignUp(props) {
         return;
       }
     });
+
+    
+   
+
 
     // Sign Up Manual Action
   };
@@ -278,4 +300,11 @@ function SignUp(props) {
   );
 }
 
-export default SignUp;
+const mapStateToProps = (state) => ({});
+
+const mapDispatchToProps = (dispatch) => ({
+  signUp: (token) => dispatch(StartupActions.signUpGoogle(token)),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
+
+

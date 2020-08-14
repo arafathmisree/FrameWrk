@@ -1,6 +1,6 @@
 const PORT = "8080";
 const HOST = "54.179.237.127";
-const BASE_URL = "http://{{" + HOST + "}}:{{" + PORT + "}}/";
+const BASE_URL = "http://" + HOST + ":" + PORT + "/";
 const AUTH_SERVICE = "cc-auth-service/";
 const API = "api/v1/";
 const ACTION_GOOGLE = "google/";

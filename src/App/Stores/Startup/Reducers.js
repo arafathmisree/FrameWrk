@@ -28,6 +28,7 @@ export const signUpGoogle = (state,{ token }) => ({
 
 export const signInGoogleSuccess = (state,{ data }) => ({
   ...state,
+  user : data 
 });
 
 export const signInGoogleFailure = (state,{ error }) => ({

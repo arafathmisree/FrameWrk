@@ -4,7 +4,7 @@ import SocialButton from "../Components/atoms/socialLogin/";
 
 import { GoogleLogin } from "react-google-login";
 
-import { useHistory, Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import { connect } from "react-redux";
 
@@ -88,20 +88,6 @@ function Login(props) {
   const gotToSignUp = () => {
     history.push("/signUp");
   };
-
-  const handleRoleLogin = (param) => {
-
-    props.setRole(param.role)
-
-    if (param.role == 'admin'){
-          history.push("/admin");
-    } else if (param.role == 'user'){
-          history.push("/user");
-    } else {
-          history.push("/error");
-    }
-    
-  }
 
   return (
     <div>
@@ -189,15 +175,6 @@ function Login(props) {
           </div>
         </Card>
       </div>
-      <div> 
-      <Button onClick={() => handleRoleLogin({role : 'admin'})} type="primary" className="mr-2">
-             Admin
-              </Button>
-              <Button onClick={() => handleRoleLogin({role : 'user'})} type="primary" className="mr-2">
-              User
-              </Button>
-      
-      </div>
     </div>
   );
 }
@@ -205,8 +182,7 @@ function Login(props) {
 const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch) => ({
-    setUserData:  (user) => dispatch(StartupActions.setUserData(user)),
-    setRole: (role) => dispatch(StartupActions.setRole(role)),
+  setUserData: (user) => dispatch(StartupActions.setUserData(user)),
   signInGoogle: (token) => dispatch(StartupActions.signInGoogle(token)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

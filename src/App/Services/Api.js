@@ -23,14 +23,40 @@ const create = (baseURL = NetworkConstants.BASE_URL) => {
     timeout: 10000,
   });
 
-
   const googleSignIn = (obj) => {
-    return api.post(NetworkConstants.AUTH_SERVICE + NetworkConstants.API + NetworkConstants.ACTION_GOOGLE + NetworkConstants.CONTROLLER_SIGNIN, obj);
+    return api.post(
+      NetworkConstants.AUTH_SERVICE +
+        NetworkConstants.API +
+        NetworkConstants.ACTION_GOOGLE +
+        NetworkConstants.CONTROLLER_SIGNIN,
+      obj
+    );
   };
 
   const googleSignUp = (obj) => {
-    return api.post(NetworkConstants.AUTH_SERVICE + NetworkConstants.API + NetworkConstants.ACTION_GOOGLE + NetworkConstants.CONTROLLER_SIGNUP, obj);
+    return api.post(
+      NetworkConstants.AUTH_SERVICE +
+        NetworkConstants.API +
+        NetworkConstants.ACTION_GOOGLE +
+        NetworkConstants.CONTROLLER_SIGNUP,
+      obj
+    );
   };
+
+
+
+  api.axiosInstance.interceptors.request.use(function (config) {
+    // Do something before request is sent
+    console.log('conn',config.originalError)
+    return config;
+  }, function (error) {
+    // Do something with request error
+    return Promise.reject(error);
+  });
+  
+  const setAuthToken = (userAuth) =>
+    api.setHeader("Authorization", "Bearer " + userAuth);
+  const removeAuthToken = () => api.deleteHeader("Authorization");
   // ------
   // STEP 2
   // ------
@@ -61,6 +87,8 @@ const create = (baseURL = NetworkConstants.BASE_URL) => {
   return {
     googleSignIn,
     googleSignUp,
+    setAuthToken,
+    removeAuthToken
     // a list of the API functions from step 2
   };
 };
