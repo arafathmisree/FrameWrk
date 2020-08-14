@@ -59,7 +59,7 @@ function Profile() {
           </div>
           <div>
             <label for="file-upload" class="custom-file-upload">
-              <i class="fa fa-cloud-upload"></i> Custom Upload
+              <i class="fa fa-cloud-upload"></i> Change Picture
             </label>
             <input id="file-upload" type="file" onChange={onDropFile} />
           </div>
