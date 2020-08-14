@@ -4,10 +4,14 @@ import rootSaga from '../Sagas/';
 import storage from 'redux-persist/lib/storage'
 import {reducer as Startup} from './Startup/Reducers'
 import {STARTUP} from './Startup/Actions';
+import { connectRouter } from 'connected-react-router'
+
+import {history} from './CreateStore'
 
 export default () => {
   const appReducer = combineReducers({
     startup: Startup,
+    router: connectRouter(history),
   });
 
   const rootReducer = (state, action) => {

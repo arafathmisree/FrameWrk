@@ -1,5 +1,6 @@
 import { put, call, select, delay } from "redux-saga/effects";
 import STARTUPACTIONS from "../Stores/Startup/Actions";
+import { push } from 'connected-react-router'
 import { HistoryWrapper } from "../Navigators/HostoryWrapper";
 
 //Saga for business logic handling
@@ -43,6 +44,7 @@ export function* signUpGoogle(api, action) {
 export function* signInSuccess(api, action) {
   try {
     yield put(STARTUPACTIONS.setRole('user'));
-    HistoryWrapper.history.push('/user');
+    yield put(push('/user/profile'))
+    // HistoryWrapper.history.push('/user');
   } catch (err) {}
 }
