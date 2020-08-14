@@ -9,7 +9,10 @@ const {Types, Creators} = createActions({
   signInGoogle : ['token'],
   signInGoogleSuccess : ['data'],
   signInGoogleFailure : ['error'],
-  signUpGoogle : ['token']
+  signUpGoogle : ['token'],
+  logOut : null,
+  logOutSuccess :null,
+  logOutFailure : ['error']
 });
 
 export const STARTUP = Types;

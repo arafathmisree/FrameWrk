@@ -2,6 +2,7 @@ import {INITIAL_STATE} from './InitialState';
 import {createReducer} from 'reduxsauce';
 import {STARTUP} from './Actions';
 
+
 /**
  *
  * Reducers
@@ -39,6 +40,16 @@ export const setRole = (state,{ role }) => ({
   ...state,
   role
 });
+export const logOut = (state) => ({
+  ...state,
+});
+export const logOutSuccess = (state) => ({
+  ...state,
+  ...INITIAL_STATE
+});
+export const logOutFailure = (state,{ error }) => ({
+  ...state,
+});
 
 export const reducer = createReducer(INITIAL_STATE, {
   [STARTUP.LOAD_DATA]: loadData,
@@ -48,4 +59,8 @@ export const reducer = createReducer(INITIAL_STATE, {
   [STARTUP.SIGN_IN_GOOGLE_SUCCESS]: signInGoogleSuccess,
   [STARTUP.SIGN_IN_GOOGLE_FAILURE]: signInGoogleFailure,
   [STARTUP.SIGN_UP_GOOGLE]: signUpGoogle,
+  [STARTUP.LOG_OUT]: logOut,
+  [STARTUP.LOG_OUT_SUCCESS]: logOutSuccess,
+  [STARTUP.LOG_OUT_FAILURE]: logOutFailure,
+
 });
