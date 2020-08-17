@@ -1,7 +1,8 @@
 // import libs
 import React from "react";
 import { connect } from "react-redux";
-import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Switch ,withRouter} from "react-router-dom";
+import { ConnectedRouter } from 'connected-react-router'
 
 
 // import components
@@ -13,18 +14,23 @@ import NavBar from "../Navigators/NavBar";
 
 import { history } from "../Stores/CreateStore";
 
+
 const Routes = (props) => (
-  <Router hisotry={history}>
-    <NavBar {...props} />
+  
+ 
     <Switch>
+
       {routes.map((route, i) => {
         if (route.auth) {
-          return <PrivateRoute key={i} {...route} role={props.role} />;
+          return (
+            <PrivateRoute key={i} {...route} role={props.role}  {...props}>
+            <NavBar {...props} />
+            </PrivateRoute>);
         }
         return <PublicRoute key={i} {...route} />;
       })}
     </Switch>
-  </Router>
+   
 );
 
 const mapStateToProps = (state) => ({
@@ -33,4 +39,4 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Routes);
+export default withRouter( connect(mapStateToProps, mapDispatchToProps)(Routes));
