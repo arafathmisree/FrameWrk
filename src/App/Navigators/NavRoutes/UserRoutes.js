@@ -1,24 +1,20 @@
-import User from "../../Containers/User"
+import User from "../../Containers/User";
 import Profile from "../../Containers/Profile";
 
 const routes = [
   {
-    path: '/user',
+    path: "/user",
     auth: true,
-    roles: [
-      'user',
-    ],
+    roles: ["user"],
     exact: true,
-    component: User
+    component: User,
   },
   {
-    path: '/user/profile',
-    auth: true,
-    roles: [
-      'user',
-    ],
+    path: "/user/profile",
+    auth: false,
+    roles: ["user"],
     exact: true,
-    component: Profile
+    component: Profile,
   },
-]
+];
 export default routes;
