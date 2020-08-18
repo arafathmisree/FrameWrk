@@ -22,6 +22,7 @@ module.exports = {
       dark : '#282f3a',
       transparent: 'transparent',
       current: 'currentColor',
+      grey10: '#e8ebf1',
 
       black: '#000',
       white: '#fff',
@@ -177,8 +178,11 @@ module.exports = {
       contain: 'contain',
     },
     borderColor: theme => ({
-      ...theme('colors'),
-      default: theme('colors.gray.300', 'currentColor'),
+      inherit: "inherit",
+      current: "currentColor",
+      default: theme("colors.grey10"),
+      error: theme("colors.danger"),
+      success: theme("colors.success"),
     }),
     borderOpacity: theme => theme('opacity'),
     borderRadius: {
