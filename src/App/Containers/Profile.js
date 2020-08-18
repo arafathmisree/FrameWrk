@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import "../assets/styles/main.css";
 
@@ -8,6 +8,8 @@ import { Typography } from "../Components/atoms/Typography";
 
 import { Textfield } from "../Components/atoms/Textfield";
 import { ImageComponent } from "../Components/atoms/ImageComponent";
+import { connect } from "react-redux";
+import ProfileActions from "../Stores/Profile/Actions";
 
 const styles = {
   display: "flex",
@@ -19,8 +21,14 @@ const styles = {
 
 let inputElement = "";
 
-function Profile() {
+function Profile(props) {
   //Default Picture
+
+  // Similar to componentDidMount and componentDidUpdate:
+  useEffect(() => {
+    // Update the document title using the browser API
+    props.userProfile();
+  });
 
   function onUploadClick(e) {
     e.target.value = null;
@@ -118,4 +126,9 @@ function Profile() {
   );
 }
 
-export default Profile;
+const mapStateToProps = (state) => ({});
+
+const mapDispatchToProps = (dispatch) => ({
+  userProfile: () => dispatch(ProfileActions.userProfile()),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

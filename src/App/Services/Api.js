@@ -65,6 +65,15 @@ const create = (baseURL = NetworkConstants.BASE_URL) => {
     }
   );
 
+  const getUserProfile = (obj) => {
+    return api.get(
+      NetworkConstants.AUTH_SERVICE +
+        NetworkConstants.API +
+        NetworkConstants.CONTROLLER_USER_PROFILE,
+      obj
+    );
+  };
+
   const setUserIdHeader = (userId) => api.setHeader("X-User-id", userId);
 
   const removeUserHeader = () => api.deleteHeader("X-User-id");
@@ -106,7 +115,8 @@ const create = (baseURL = NetworkConstants.BASE_URL) => {
     removeAuthToken,
     setUserIdHeader,
     logOutUser,
-    removeUserHeader
+    removeUserHeader,
+    getUserProfile,
     // a list of the API functions from step 2
   };
 };
