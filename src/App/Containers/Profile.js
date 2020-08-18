@@ -5,12 +5,44 @@ import "../assets/styles/main.css";
 import { Button } from "../Components/atoms/Button";
 import { Card } from "../Components/atoms/Card";
 import { Typography } from "../Components/atoms/Typography";
-import ImageUploader from "react-images-upload";
 
 import { Textfield } from "../Components/atoms/Textfield";
 import { ImageComponent } from "../Components/atoms/ImageComponent";
 
+const styles = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  flexWrap: "wrap",
+  width: "100%",
+};
+
+let inputElement = "";
+
 function Profile() {
+  //Default Picture
+
+  function onUploadClick(e) {
+    e.target.value = null;
+  }
+
+  const [picture, setPicture] = useState(
+    "https://banner2.cleanpng.com/20180802/icj/kisspng-user-profile-default-computer-icons-network-video-the-foot-problems-of-the-disinall-foot-care-founde-5b6346121ec769.0929994515332326581261.jpg"
+  );
+
+  function triggerFileUpload() {
+    inputElement.click();
+  }
+
+  function onDropFile(e) {
+    const files = e.target.files;
+    // Iterate over all uploaded files
+    for (let i = 0; i < files.length; i++) {
+      let file = files[i];
+      readFile(file);
+    }
+  }
+
   function readFile(file) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -27,19 +59,6 @@ function Profile() {
     });
   }
 
-  function onDropFile(e) {
-    const files = e.target.files;
-    // Iterate over all uploaded files
-    for (let i = 0; i < files.length; i++) {
-      let file = files[i];
-      readFile(file);
-    }
-  }
-
-  //Default Picture
-  const [picture, setPicture] = useState(
-    "https://homepages.cae.wisc.edu/~ece533/images/airplane.png"
-  );
   return (
     <div>
       <div className="flex justify-center p-8 md:pt-24">
@@ -58,10 +77,18 @@ function Profile() {
             <ImageComponent image={picture} />
           </div>
           <div>
-            <label for="file-upload" class="custom-file-upload">
-              <i class="fa fa-cloud-upload"></i> Change Picture
-            </label>
-            <input id="file-upload" type="file" onChange={onDropFile} />
+            <input
+              style={{ visibility: "hidden" }}
+              type="file"
+              id="myFile"
+              name="filename"
+              ref={(input) => (inputElement = input)}
+              onChange={onDropFile}
+              onClick={onUploadClick}
+            />
+            <Button onClick={triggerFileUpload} type="primary" className="mr-2">
+              Change Picture
+            </Button>
           </div>
           <div className="mt-4">
             <Textfield label="First name"></Textfield>
