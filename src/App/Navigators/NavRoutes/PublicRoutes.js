@@ -12,13 +12,6 @@ const routes = [
     component: Login
   },
   {
-    path: '/about',
-    auth: false,
-    roles: [],
-    exact: true,
-    component: About
-  },
-  {
     path: '/login',
     auth: false,
     roles: [],

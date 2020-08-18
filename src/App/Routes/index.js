@@ -1,5 +1,5 @@
 // import libs
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Switch ,withRouter} from "react-router-dom";
 import { ConnectedRouter } from 'connected-react-router'
@@ -10,33 +10,38 @@ import routes, { User, Admin } from "./routes";
 import PrivateRoute from "./Private";
 import PublicRoute from "./Public";
 import NavBar from "../Navigators/NavBar";
-
+import StartupActions from "../Stores/Startup/Actions";
 
 import { history } from "../Stores/CreateStore";
 
+function Routes (props) {
 
-const Routes = (props) => (
-  
- 
-    <Switch>
+  useEffect(() => {
+    props.checkAuthenticated()
+  });
 
+return ( 
+    <div>
+      <NavBar {...props} />
+      <Switch>
       {routes.map((route, i) => {
         if (route.auth) {
-          return (
-            <PrivateRoute key={i} {...route} role={props.role}  {...props}>
-            <NavBar {...props} />
-            </PrivateRoute>);
+          return <PrivateRoute key={i} {...route} role={props.role} props={props} />
         }
-        return <PublicRoute key={i} {...route} />;
+        return <PublicRoute key={i} {...route} {...props}/>;
       })}
     </Switch>
+    </div>);
    
-);
+  };
 
 const mapStateToProps = (state) => ({
   role: state.startup.role,
+  isAuthenticated: state.startup.isAuthenticated
 });
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => ({
+  checkAuthenticated : () => dispatch(StartupActions.checkAuthenticated())
+});
 
 export default withRouter( connect(mapStateToProps, mapDispatchToProps)(Routes));

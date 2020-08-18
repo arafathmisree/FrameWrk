@@ -48,7 +48,7 @@ function Login(props) {
         idToken : response.tokenId
       }
       props.signInGoogle(payload)
-   
+
     } else {
       alert("login error");
     }
@@ -184,5 +184,6 @@ const mapStateToProps = (state) => ({});
 const mapDispatchToProps = (dispatch) => ({
   setUserData: (user) => dispatch(StartupActions.setUserData(user)),
   signInGoogle: (token) => dispatch(StartupActions.signInGoogle(token)),
+  isAuthenticated : () => dispatch(StartupActions.isAuthenticated())
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

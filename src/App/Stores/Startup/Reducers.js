@@ -14,9 +14,9 @@ export const loadData = (state) => ({
 
 
 export const setUserData = (state,{ user }) => ({
-  ...state,
-   user
-});
+    ...state,
+    user
+  });
 
 export const signInGoogle = (state,{ token }) => ({
   ...state,
@@ -36,10 +36,15 @@ export const signInGoogleFailure = (state,{ error }) => ({
   ...state,
 });
 
-export const setRole = (state,{ role }) => ({
-  ...state,
-  role
-});
+export const setRole = (state,{ role }) => {
+  localStorage.setItem('user', state.user)
+  localStorage.setItem('role', role)
+    return ({
+      ...state,
+      role
+    })
+  };
+
 export const logOut = (state) => ({
   ...state,
 });
@@ -49,6 +54,12 @@ export const logOutSuccess = (state) => ({
 });
 export const logOutFailure = (state,{ error }) => ({
   ...state,
+});
+
+export const checkAuthenticated = (state) => ({
+  ...state,
+  isAuthenticated: !!localStorage.getItem('user'),
+  role: !!localStorage.getItem('role')
 });
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -62,5 +73,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [STARTUP.LOG_OUT]: logOut,
   [STARTUP.LOG_OUT_SUCCESS]: logOutSuccess,
   [STARTUP.LOG_OUT_FAILURE]: logOutFailure,
-
+  [STARTUP.CHECK_AUTHENTICATED]: checkAuthenticated
 });
