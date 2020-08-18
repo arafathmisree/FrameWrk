@@ -59,7 +59,7 @@ export const logOutFailure = (state,{ error }) => ({
 export const checkAuthenticated = (state) => ({
   ...state,
   isAuthenticated: !!localStorage.getItem('user'),
-  role: !!localStorage.getItem('role')
+  role: localStorage.getItem('role')
 });
 
 export const reducer = createReducer(INITIAL_STATE, {
