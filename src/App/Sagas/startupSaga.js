@@ -42,8 +42,9 @@ export function* signUpGoogle(api, action) {
 
 export function* signInSuccess(api, action) {
   try {
-    yield put(STARTUPACTIONS.setRole("user"));
-    yield put(push("/user"));
+    var role = "user"
+    yield put(STARTUPACTIONS.setRole(role));
+    yield put(push(`${role}/dashboard`));
     // HistoryWrapper.history.push('/user');
   } catch (err) {}
 }

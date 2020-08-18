@@ -1,7 +1,7 @@
 // import libs
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { BrowserRouter as Router, Switch ,withRouter} from "react-router-dom";
+import { BrowserRouter as Router, Switch ,withRouter, Redirect, Route} from "react-router-dom";
 import { ConnectedRouter } from 'connected-react-router'
 
 
@@ -30,6 +30,7 @@ return (
         }
         return <PublicRoute key={i} {...route} {...props}/>;
       })}
+      <Route render={() => <Redirect to="/404" />} />
     </Switch>
     </div>);
    
