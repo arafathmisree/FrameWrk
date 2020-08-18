@@ -129,7 +129,7 @@ function Login(props) {
               ></Textfield>
             </div>
 
-            <div className="flex mt-8">
+            <div className="flex mt-4">
               <Button onClick={login} type="primary" className="mr-2">
                 Sign in
               </Button>

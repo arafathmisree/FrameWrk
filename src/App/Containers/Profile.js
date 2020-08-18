@@ -115,10 +115,10 @@ function Profile() {
           </div>
 
           <div className="flex mt-8">
-            <Button type="primary" className="mr-2">
+            <Button type="primary" className="mr-2 flex-grow">
               Save
             </Button>
-            <Button type="danger" className="ml-2">
+            <Button type="danger" className="ml-2 flex-grow">
               Cancel
             </Button>
           </div>
