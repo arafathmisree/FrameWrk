@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Switch ,withRouter, Redirect, Route} from "react-router-dom";
 import { ConnectedRouter } from 'connected-react-router'
-
+import DashboardContainer from "../Components/molecules/DashboardsContainer";
 
 // import components
 import routes, { User, Admin } from "./routes";
@@ -20,10 +20,11 @@ function Routes (props) {
     props.checkAuthenticated()
   });
 
-return ( 
+return (
     <div>
-      <NavBar {...props} />
-      <Switch>
+      {/*<NavBar {...props} />*/}
+        <DashboardContainer navbarItems={routes} role={props.role} authenticated={props.isAuthenticated} />
+        <Switch>
       {routes.map((route, i) => {
         if (route.auth) {
           return <PrivateRoute key={i} {...route} role={props.role} props={props} />
@@ -33,7 +34,7 @@ return (
       <Route render={() => <Redirect to="/404" />} />
     </Switch>
     </div>);
-   
+
   };
 
 const mapStateToProps = (state) => ({
