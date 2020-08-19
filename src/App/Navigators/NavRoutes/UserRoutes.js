@@ -10,7 +10,18 @@ const routes = [
     component: User,
   },
   {
-    path: "/user/profile",
+    path: '/user/profile',
+    title: 'Profile',
+    auth: true,
+    roles: [
+      'user',
+    ],
+    exact: true,
+    component: Profile
+  },
+  {
+    path: '/user/logout',
+    title: 'Logout',
     auth: true,
     roles: ["user"],
     exact: true,
