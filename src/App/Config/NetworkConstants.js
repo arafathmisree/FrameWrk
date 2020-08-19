@@ -6,8 +6,9 @@ const API = "api/v1/";
 const ACTION_GOOGLE = "google/";
 const CONTROLLER_SIGNIN = "sign-in";
 const CONTROLLER_SIGNUP = "signup";
-const SIGN_OUT = "sign-out"
-const USERS = "users/"
+const CONTROLLER_USER_PROFILE = "users";
+const SIGN_OUT = "sign-out";
+const USERS = "users/";
 
 export default {
   BASE_URL,
@@ -16,6 +17,7 @@ export default {
   ACTION_GOOGLE,
   CONTROLLER_SIGNIN,
   CONTROLLER_SIGNUP,
+  CONTROLLER_USER_PROFILE,
   USERS,
-  SIGN_OUT
+  SIGN_OUT,
 };
