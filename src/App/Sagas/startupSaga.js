@@ -60,8 +60,10 @@ export function* logOutUser(api, action) {
     if (response.ok) {
       var resp = response.data.data;
       api.removeUserHeader();
-      yield put(push("/login"));
+      api.removeAuthToken()
+      localStorage.clear()
       yield put(STARTUPACTIONS.logOutSuccess(resp));
+      yield put(push("/login"));
     } else {
       yield put(STARTUPACTIONS.logOutFailure(response.error));
       api.removeUserHeader();

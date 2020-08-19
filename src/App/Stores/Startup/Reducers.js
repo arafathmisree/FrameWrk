@@ -47,7 +47,8 @@ export const setRole = (state,{ role }) => {
 
 
 export const logOutSuccess = (state) => ({
-  ...state
+  ...state,
+  ...INITIAL_STATE
 });
 export const logOutFailure = (state,{ error }) => ({
   ...state,
