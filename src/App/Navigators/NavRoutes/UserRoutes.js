@@ -11,7 +11,7 @@ const routes = [
   },
   {
     path: "/user/profile",
-    auth: false,
+    auth: true,
     roles: ["user"],
     exact: true,
     component: Profile,
