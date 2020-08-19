@@ -5,7 +5,7 @@ import PROFILEACTIONS from "../Stores/Profile/Actions";
 
 export function* userProfile(api, action) {
   try {
-    const response = yield call(api.getUserProfile, action.token);
+    const response = yield call(api.getUserProfile);
     console.log("** GET USER PROFILE CALL **", response);
     if (response.ok) {
       yield put(PROFILEACTIONS.userProfileSuccess(response.data.data));

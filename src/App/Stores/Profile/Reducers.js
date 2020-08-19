@@ -13,7 +13,7 @@ export const userProfile = (state) => ({
 
 export const userProfileSuccess = (state, { data }) => ({
   ...state,
-  profile: data,
+  userData: data,
 });
 
 export const userProfilFailure = (state, { error }) => ({

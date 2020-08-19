@@ -4,7 +4,7 @@ import { createActions } from "reduxsauce";
 
 const { Types, Creators } = createActions({
   userProfile: ["token"],
-  userProfileSuccess: ["profile"],
+  userProfileSuccess: ["data"],
   userProfileFailure: ["error"],
 });
 

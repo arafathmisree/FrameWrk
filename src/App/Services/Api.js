@@ -16,7 +16,7 @@ const create = (baseURL = NetworkConstants.BASE_URL) => {
     // here are some default headers
     headers: {
       "Cache-Control": "no-cache",
-      "Content-Type": "application/json;charset=UTF-8",
+      "Content-Type": "application/json",
       Accept: "application/json;charset=UTF-8",
     },
     // 10 second timeout...
@@ -65,12 +65,13 @@ const create = (baseURL = NetworkConstants.BASE_URL) => {
     }
   );
 
-  const getUserProfile = (obj) => {
+  const getUserProfile = () => {
     return api.get(
       NetworkConstants.AUTH_SERVICE +
         NetworkConstants.API +
         NetworkConstants.CONTROLLER_USER_PROFILE,
-      obj
+      {},
+      { data: {} }
     );
   };
 

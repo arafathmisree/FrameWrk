@@ -21,5 +21,5 @@ export default function* root() {
   yield all([takeLatest(STARTUP.SIGN_IN_GOOGLE_SUCCESS, signInSuccess, api)]);
   yield all([takeLatest(STARTUP.LOG_OUT, logOutUser, api)]);
 
-  yield all([takeLatest(PROFILE.GET_USER_PROFILE, userProfile, api)]);
+  yield all([takeLatest(PROFILE.USER_PROFILE, userProfile, api)]);
 }

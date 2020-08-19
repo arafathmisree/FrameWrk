@@ -14,6 +14,7 @@ export function* signInGoogle(api, action) {
     if (response.ok) {
       var resp = response.data.data;
       api.setAuthToken(resp.accessToken);
+      api.setUserIdHeader(resp.userId);
       yield put(STARTUPACTIONS.signInGoogleSuccess(resp));
     } else {
       yield put(STARTUPACTIONS.signInGoogleFailure(response.error));
@@ -49,25 +50,23 @@ export function* signInSuccess(api, action) {
 }
 
 export function* logOutUser(api, action) {
+  try {
+    const state = yield select();
+    api.setUserIdHeader(state.startup.user.userId);
+    const response = yield call(api.logOutUser, action.token);
 
-    try {
-        const state = yield select();
-        api.setUserIdHeader(state.startup.user.userId)
-        const response = yield call(api.logOutUser, action.token);
-    
-        console.log("acc", response);
-        if (response.ok) {
-          var resp = response.data.data;
-          api.removeUserHeader()
-          yield put(push("/login"));
-          yield put(STARTUPACTIONS.logOutSuccess(resp));
-        } else {
-          yield put(STARTUPACTIONS.logOutFailure(response.error));
-          api.removeUserHeader()
-        }
-      } catch (err) {
-        yield put(STARTUPACTIONS.logOutFailure(err.message));
-        api.removeUserHeader()
-      }
-
+    console.log("acc", response);
+    if (response.ok) {
+      var resp = response.data.data;
+      api.removeUserHeader();
+      yield put(push("/login"));
+      yield put(STARTUPACTIONS.logOutSuccess(resp));
+    } else {
+      yield put(STARTUPACTIONS.logOutFailure(response.error));
+      api.removeUserHeader();
+    }
+  } catch (err) {
+    yield put(STARTUPACTIONS.logOutFailure(err.message));
+    api.removeUserHeader();
+  }
 }
