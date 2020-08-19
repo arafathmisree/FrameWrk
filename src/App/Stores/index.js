@@ -17,8 +17,7 @@ export default () => {
   });
 
   const rootReducer = (state, action) => {
-    console.log("globals state", state);
-    if (action.type === STARTUP.LOG_OUT) {
+    if (action.type === STARTUP.LOG_OUT_SUCCESS) {
       storage.removeItem("persist:root");
 
       state = undefined;

@@ -7,10 +7,10 @@ import {
   signUpGoogle,
   logOutUser,
   signInSuccess,
+  loadData,
 } from "./startupSaga";
-
-import { userProfile } from "./profileSaga";
 import API from "../Services/Api";
+import { userProfile } from "./profileSaga";
 
 const api = API.create();
 
@@ -22,4 +22,5 @@ export default function* root() {
   yield all([takeLatest(STARTUP.LOG_OUT, logOutUser, api)]);
 
   yield all([takeLatest(PROFILE.USER_PROFILE, userProfile, api)]);
+  yield all([takeLatest(STARTUP.LOAD_DATA, loadData, api)]);
 }

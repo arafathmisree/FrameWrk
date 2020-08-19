@@ -4,7 +4,6 @@ import AdminBar from "../Navigators/NavBar/Admin"
 import UserBar from "../Navigators/NavBar/User"
 
 const navBar = function(props){
-    console.log(props);
     switch (props.role) {
         case 'admin':
             return <AdminBar/>
@@ -16,18 +15,11 @@ const navBar = function(props){
 }
 const NavBar = ( props ) => ( 
     <div>
-        <ul>
-            <li>
-                <Link to="/">home</Link>
-            </li>
-            <li>
-                <Link to="/about">About</Link>
-            </li>
-            <li>
-                <Link to="/login">Login</Link>
-            </li>
+        <ul> 
             {
-                navBar(props)
+                props.isAuthenticated 
+                ? navBar(props) 
+                : ''
             }
         </ul>
         

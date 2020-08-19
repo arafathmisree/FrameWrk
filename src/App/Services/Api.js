@@ -17,7 +17,7 @@ const create = (baseURL = NetworkConstants.BASE_URL) => {
     headers: {
       "Cache-Control": "no-cache",
       "Content-Type": "application/json",
-      Accept: "application/json;charset=UTF-8",
+      Accept: "application/json",
     },
     // 10 second timeout...
     timeout: 10000,
@@ -43,20 +43,21 @@ const create = (baseURL = NetworkConstants.BASE_URL) => {
     );
   };
 
-  const logOutUser = (obj) => {
+  const logOutUser = () => {
     return api.get(
       NetworkConstants.AUTH_SERVICE +
         NetworkConstants.API +
         NetworkConstants.USERS +
         NetworkConstants.SIGN_OUT,
-      obj
+      {},
+      { data: {} }
     );
   };
 
   api.axiosInstance.interceptors.request.use(
     function (config) {
       // Do something before request is sent
-      console.log("conn", config.originalError);
+      console.log("conn", config);
       return config;
     },
     function (error) {

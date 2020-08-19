@@ -3,7 +3,7 @@ import Profile from "../../Containers/Profile";
 
 const routes = [
   {
-    path: "/user",
+    path: "/user/dashboard",
     auth: true,
     roles: ["user"],
     exact: true,

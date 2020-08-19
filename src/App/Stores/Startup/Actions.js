@@ -12,7 +12,9 @@ const {Types, Creators} = createActions({
   signUpGoogle : ['token'],
   logOut : null,
   logOutSuccess :null,
-  logOutFailure : ['error']
+  logOutFailure : ['error'],
+  checkAuthenticated : null,
+  loadDataSuccess: null
 });
 
 export const STARTUP = Types;

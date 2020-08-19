@@ -1,7 +1,6 @@
-import Home from "../../Containers/Home"
 import Login from "../../Containers/Login"
-import About from "../../Containers/About"
 import signUpComp from "../../Containers/SignUp"
+import NotFound from "../../Containers/NotFound"
 
 const routes = [
   {
@@ -10,13 +9,6 @@ const routes = [
     roles: [],
     exact: true,
     component: Login
-  },
-  {
-    path: '/about',
-    auth: false,
-    roles: [],
-    exact: true,
-    component: About
   },
   {
     path: '/login',
@@ -31,6 +23,13 @@ const routes = [
     roles: [],
     exact: true,
     component: signUpComp
+  },
+  {
+    path: '/404',
+    auth: false,
+    roles: [],
+    exact: true,
+    component: NotFound
   },
 ]
 
