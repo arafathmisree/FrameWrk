@@ -71,18 +71,15 @@ function Profile(props) {
     <div>
       <div className="flex justify-center p-8 md:pt-24">
         <Card type="primary" size="small">
-          <Typography color="primary" type="h1">
-            John Doe
-          </Typography>
-          <div
-            style={{
-              textAlign: "center",
-              width: 120,
-              borderRadius: "50%",
-              borderWidth: 10,
-            }}
-          >
-            <ImageComponent image={picture} />
+          <div className="flex justify-center">
+            <Typography color="primary" type="h1">
+              John Doe
+            </Typography>
+          </div>
+          <div className=" flex justify-center mt-2">
+            <div className="rounded-full w-3/4">
+              <ImageComponent image={picture} />
+            </div>
           </div>
           <div>
             <input
@@ -94,29 +91,42 @@ function Profile(props) {
               onChange={onDropFile}
               onClick={onUploadClick}
             />
-            <Button onClick={triggerFileUpload} type="primary" className="mr-2">
-              Change Picture
-            </Button>
+            <div className="flex justify-center">
+              <Button onClick={triggerFileUpload} type="outline" className="mr-2">
+                Change Picture
+              </Button>
+            </div>
           </div>
           <div className="mt-4">
-            <Textfield label="First name"></Textfield>
-            <Textfield label="Last name"></Textfield>
-            <Textfield label="User name"></Textfield>
-            <Textfield label="Email"></Textfield>
-            <Textfield label="Mobile Number"></Textfield>
-            <Textfield label="Address 1"></Textfield>
-            <Textfield label="Address 2"></Textfield>
-            <Textfield label="Zip Code"></Textfield>
+            <Textfield label="First name" placeholder="First name" type="primary" size="sm"></Textfield>
+          </div>
+          <div className="mt-4">
+            <Textfield label="Last name" placeholder="Last name" type="primary" size="sm"></Textfield>
+          </div>
+          <div className="mt-4">
+            <Textfield label="User name" placeholder="User name" type="primary" size="sm"></Textfield>
+          </div>
+          <div className="mt-4">
+            <Textfield label="Email" placeholder="Email" type="primary" size="sm"></Textfield>
+          </div>
+          <div className="mt-4">
+            <Textfield label="Mobile Number" placeholder="Mobile Number" type="primary" size="sm"></Textfield>
+          </div>
+          <div className="mt-4">
+            <Textfield label="Address 1" placeholder="Address 1" type="primary" size="sm"></Textfield>
+          </div>
+          <div className="mt-4">
+            <Textfield label="Address 2" placeholder="Address 2" type="primary" size="sm"></Textfield>
+          </div>
+          <div className="mt-4">
+            <Textfield label="Zip Code" placeholder="Zip Code" type="primary" size="sm"></Textfield>
           </div>
 
-          <div className="text-center my-4">
-            <Button type="primary" className="ml-2">
+          <div className="flex mt-8">
+            <Button type="primary" className="mr-2 flex-grow">
               Save
             </Button>
-          </div>
-
-          <div className="text-center my-4">
-            <Button type="danger" className="ml-2">
+            <Button type="danger" className="ml-2 flex-grow">
               Cancel
             </Button>
           </div>
