@@ -2,8 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import { NavTheme } from './NavStyles';
 
-function NavBar({items, color,role}) {
-
+function NavBar({items, color, role, isAuthenticated}) {
+    console.log("role",role)
+    console.log(isAuthenticated)
     return (
 
             <header className={`${NavTheme[color]} shadow sm:flex sm:justify-between sm:items-center sm:px-4`}>
@@ -24,18 +25,16 @@ function NavBar({items, color,role}) {
                 </div>
 
                 <nav className="pt-2 pb-4 sm:flex sm:p-0">
-                    {
-                        items.map((item,index)=>{
-                            return <a key={index} href={item.path} className="block px-4 py-3 hover:opacity-75">{item.title}</a>
+                    {items.map((item,index)=>{
+                            if (!isAuthenticated && item.auth==false){
+                                return <a key={index} href={item.path} className="block px-4 py-3 hover:opacity-75">{item.title}</a>
+                            }else if (isAuthenticated && item.auth==true && (item.roles.find(roleItem=>roleItem==role) == role)){
+                                return <a key={index} href={item.path} className="block px-4 py-3 hover:opacity-75">{item.title}</a>
+                            }
                         })
                     }
-                    {/*<a href="#" className="block px-4 py-3 hover:opacity-75">Home</a>*/}
-                    {/*<a href="#" className="block px-4 py-3 hover:opacity-75">Blog</a>*/}
-                    {/*<a href="#" className="block px-4 py-3 hover:opacity-75">About Us</a>*/}
-                    {/*<a hr e f="#" className="block px-4 py-3 hover:opacity-75">Contact Us</a>*/}
                 </nav>
             </header>
-
     )
 }
 
