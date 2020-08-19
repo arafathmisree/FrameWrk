@@ -25,15 +25,9 @@ let inputElement = "";
 function Profile(props) {
   //Default Picture
 
-  const [picture, setPicture] = useState(
-    props.profile
-      ? props.profile.imageUrl
-      : "https://banner2.cleanpng.com/20180802/icj/kisspng-user-profile-default-computer-icons-network-video-the-foot-problems-of-the-disinall-foot-care-founde-5b6346121ec769.0929994515332326581261.jpg"
-  );
-  const [fname, setFname] = useState(
-    props.profile ? props.profile.fullName : ""
-  );
-  const [email, setEmail] = useState(props.profile ? props.profile.email : "");
+  const [picture, setPicture] = useState("");
+  const [fname, setFname] = useState("");
+  const [email, setEmail] = useState("");
 
   // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
@@ -80,12 +74,14 @@ function Profile(props) {
           <Card type="primary" size="small">
             <div className="flex justify-center">
               <Typography color="primary" type="h1">
-                {props.profile.fullName}
+                {props.profile ? props.profile.fullName : ""}
               </Typography>
             </div>
             <div className=" flex justify-center mt-2">
               <div className="rounded-full w-3/4">
-                <ImageComponent image={picture} />
+                <ImageComponent
+                  image={props.profile ? props.profile.imageUrl : ""}
+                />
               </div>
             </div>
             <div>
@@ -111,7 +107,7 @@ function Profile(props) {
             <div className="mt-4">
               <Textfield
                 label="First name"
-                value={fname}
+                value={props.profile ? props.profile.fullName : ""}
                 placeholder="First name"
                 type="primary"
                 size="sm"
@@ -137,7 +133,7 @@ function Profile(props) {
               <Textfield
                 label="Email"
                 disabled={true}
-                value={email}
+                value={props.profile ? props.profile.email : ""}
                 placeholder="Email"
                 type="primary"
                 size="sm"
