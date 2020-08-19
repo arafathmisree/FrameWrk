@@ -37,7 +37,7 @@ export const signInGoogleFailure = (state,{ error }) => ({
 });
 
 export const setRole = (state,{ role }) => {
-  localStorage.setItem('user', state.user)
+  localStorage.setItem('user', JSON.stringify(state.user))
   localStorage.setItem('role', role)
     return ({
       ...state,
@@ -60,7 +60,7 @@ export const checkAuthenticated = (state) => ({
   ...state,
   isAuthenticated: !!localStorage.getItem('user'),
   role: localStorage.getItem('role'),
-  user: !!localStorage.getItem('user') ? localStorage.getItem('user') : {}
+  user: !!localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {}
 });
 
 export const reducer = createReducer(INITIAL_STATE, {
