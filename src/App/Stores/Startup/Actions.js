@@ -13,7 +13,8 @@ const {Types, Creators} = createActions({
   logOut : null,
   logOutSuccess :null,
   logOutFailure : ['error'],
-  checkAuthenticated : null
+  checkAuthenticated : null,
+  loadDataSuccess: null
 });
 
 export const STARTUP = Types;

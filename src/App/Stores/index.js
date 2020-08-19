@@ -15,7 +15,7 @@ export default () => {
   });
 
   const rootReducer = (state, action) => {
-    if (action.type === STARTUP.LOG_OUT) {
+    if (action.type === STARTUP.LOG_OUT_SUCCESS) {
       storage.removeItem('persist:root');
 
       state = undefined;

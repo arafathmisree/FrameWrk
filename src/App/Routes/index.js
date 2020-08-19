@@ -1,7 +1,7 @@
 // import libs
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { BrowserRouter as Router, Switch ,withRouter} from "react-router-dom";
+import { BrowserRouter as Router, Switch ,withRouter, Redirect, Route} from "react-router-dom";
 import { ConnectedRouter } from 'connected-react-router'
 import DashboardContainer from "../Components/molecules/DashboardsContainer";
 
@@ -22,17 +22,16 @@ function Routes (props) {
 
 return (
     <div>
-      {/*<NavBar {...props} />*/}
-      <DashboardContainer navbarItems={routes} role={props.role} />
-          <Switch>
-          {routes.map((route, i) => {
-            if (route.auth) {
-              return <PrivateRoute key={i} {...route} role={props.role} props={props} />
-            }
-            return <PublicRoute key={i} {...route} {...props}/>;
-          })}
-        </Switch>
-
+      <NavBar {...props} />
+      <Switch>
+      {routes.map((route, i) => {
+        if (route.auth) {
+          return <PrivateRoute key={i} {...route} role={props.role} props={props} />
+        }
+        return <PublicRoute key={i} {...route} {...props}/>;
+      })}
+      <Route render={() => <Redirect to="/404" />} />
+    </Switch>
     </div>);
 
   };
