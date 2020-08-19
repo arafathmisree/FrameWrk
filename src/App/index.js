@@ -6,7 +6,7 @@ import { ConnectedRouter } from 'connected-react-router'
 import Root from "./root";
 import {history} from './Stores/CreateStore'
 
-const { store, persistor  } = createStore();
+export const { store, persistor  } = createStore();
 
 
 function App() {

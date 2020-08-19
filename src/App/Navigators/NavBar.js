@@ -17,7 +17,7 @@ const navBar = function(props){
 const NavBar = ( props ) => ( 
     <div>
         <ul>
-            {/* <li>
+            <li>
                 <Link to="/">home</Link>
             </li>
             <li>
@@ -25,7 +25,7 @@ const NavBar = ( props ) => (
             </li>
             <li>
                 <Link to="/login">Login</Link>
-            </li> */}
+            </li>
             {
                 navBar(props)
             }
