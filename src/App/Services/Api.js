@@ -16,8 +16,8 @@ const create = (baseURL = NetworkConstants.BASE_URL) => {
     // here are some default headers
     headers: {
       "Cache-Control": "no-cache",
-      "Content-Type": "application/json;charset=UTF-8",
-      Accept: "application/json;charset=UTF-8",
+      "Content-Type": "application/json",
+      "Accept": "application/json",
     },
     // 10 second timeout...
     timeout: 10000,
@@ -43,20 +43,17 @@ const create = (baseURL = NetworkConstants.BASE_URL) => {
     );
   };
 
-  const logOutUser = (obj) => {
+  const logOutUser = () => {
     return api.get(
       NetworkConstants.AUTH_SERVICE +
         NetworkConstants.API +
         NetworkConstants.USERS +
-        NetworkConstants.SIGN_OUT,
-      obj
-    );
-  };
+        NetworkConstants.SIGN_OUT,{},{data:{}})};
 
   api.axiosInstance.interceptors.request.use(
     function (config) {
       // Do something before request is sent
-      console.log("conn", config.originalError);
+      console.log("conn", config);
       return config;
     },
     function (error) {
@@ -82,7 +79,7 @@ const create = (baseURL = NetworkConstants.BASE_URL) => {
   //
   // I generally don't like wrapping the output at this level because
   // sometimes specific actions need to be take on `403` or `401`, etc.
-  //
+//
   // Since we can't hide from that, we embrace it by getting out of the
   // way at this level.
   //

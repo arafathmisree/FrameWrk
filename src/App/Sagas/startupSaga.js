@@ -42,7 +42,7 @@ export function* signUpGoogle(api, action) {
 
 export function* signInSuccess(api, action) {
   try {
-    var role = "user"
+    var role = "user";
     yield put(STARTUPACTIONS.setRole(role));
     yield put(push(`${role}/dashboard`));
     // HistoryWrapper.history.push('/user');
@@ -50,25 +50,36 @@ export function* signInSuccess(api, action) {
 }
 
 export function* logOutUser(api, action) {
+  try {
+    let state = yield select();
+    console.log("sr", state);
+    api.setUserIdHeader(state.startup.user.userId);
+    const response = yield call(api.logOutUser, action.token);
 
-    try {
-        const state = yield select();
-        api.setUserIdHeader(state.startup.user.userId)
-        const response = yield call(api.logOutUser, action.token);
-    
-        console.log("acc", response);
-        if (response.ok) {
-          var resp = response.data.data;
-          api.removeUserHeader()
-          yield put(push("/login"));
-          yield put(STARTUPACTIONS.logOutSuccess(resp));
-        } else {
-          yield put(STARTUPACTIONS.logOutFailure(response.error));
-          api.removeUserHeader()
-        }
-      } catch (err) {
-        yield put(STARTUPACTIONS.logOutFailure(err.message));
-        api.removeUserHeader()
-      }
+    console.log("acc", response);
+    if (response.ok) {
+      var resp = response.data.data;
+      api.removeUserHeader();
+      yield put(push("/login"));
+      yield put(STARTUPACTIONS.logOutSuccess(resp));
+    } else {
+      yield put(STARTUPACTIONS.logOutFailure(response.error));
+      api.removeUserHeader();
+    }
+  } catch (err) {
+    yield put(STARTUPACTIONS.logOutFailure(err.message));
+    api.removeUserHeader();
+  }
+}
 
+export function* loadData(api, action) {
+  try {
+    var user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
+      api.setAuthToken(user.accessToken);
+      yield put(STARTUPACTIONS.loadDataSuccess())
+    }
+  } catch (err) {
+    console.log(err);
+  }
 }
