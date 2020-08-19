@@ -14,7 +14,6 @@ export function* signInGoogle(api, action) {
     if (response.ok) {
       var resp = response.data.data;
       api.setAuthToken(resp.accessToken);
-      api.setUserIdHeader(resp.userId);
       yield put(STARTUPACTIONS.signInGoogleSuccess(resp));
     } else {
       yield put(STARTUPACTIONS.signInGoogleFailure(response.error));
@@ -32,7 +31,7 @@ export function* signUpGoogle(api, action) {
     if (response.ok) {
       var resp = response.data.data;
       api.setAuthToken(resp.accessToken);
-      yield put(STARTUPACTIONS.signInGoogle(action.token));
+      yield put(STARTUPACTIONS.signUpGoogle(action.token));
     } else {
       yield put(STARTUPACTIONS.signInGoogleFailure(response.error));
     }
@@ -61,8 +60,8 @@ export function* logOutUser(api, action) {
     if (response.ok) {
       var resp = response.data.data;
       api.removeUserHeader();
-      api.removeAuthToken();
-      localStorage.clear();
+      api.removeAuthToken()
+      localStorage.clear()
       yield put(STARTUPACTIONS.logOutSuccess(resp));
       yield put(push("/login"));
     } else {
@@ -80,7 +79,7 @@ export function* loadData(api, action) {
     var user = JSON.parse(localStorage.getItem("user"));
     if (user) {
       api.setAuthToken(user.accessToken);
-      yield put(STARTUPACTIONS.loadDataSuccess());
+      yield put(STARTUPACTIONS.loadDataSuccess())
     }
   } catch (err) {
     console.log(err);

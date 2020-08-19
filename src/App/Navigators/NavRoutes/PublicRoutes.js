@@ -5,7 +5,6 @@ import NotFound from "../../Containers/NotFound"
 const routes = [
   {
     path: '/',
-    title: 'Home',
     auth: false,
     roles: [],
     exact: true,
@@ -13,7 +12,6 @@ const routes = [
   },
   {
     path: '/login',
-    title: 'Login',
     auth: false,
     roles: [],
     exact: true,
@@ -21,7 +19,6 @@ const routes = [
   },
   {
     path: '/SignUp',
-    title: 'SignUp',
     auth: false,
     roles: [],
     exact: true,

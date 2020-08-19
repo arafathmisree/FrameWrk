@@ -17,7 +17,7 @@ const create = (baseURL = NetworkConstants.BASE_URL) => {
     headers: {
       "Cache-Control": "no-cache",
       "Content-Type": "application/json",
-      Accept: "application/json",
+      "Accept": "application/json",
     },
     // 10 second timeout...
     timeout: 10000,
@@ -48,11 +48,7 @@ const create = (baseURL = NetworkConstants.BASE_URL) => {
       NetworkConstants.AUTH_SERVICE +
         NetworkConstants.API +
         NetworkConstants.USERS +
-        NetworkConstants.SIGN_OUT,
-      {},
-      { data: {} }
-    );
-  };
+        NetworkConstants.SIGN_OUT,{},{data:{}})};
 
   api.axiosInstance.interceptors.request.use(
     function (config) {
@@ -65,16 +61,6 @@ const create = (baseURL = NetworkConstants.BASE_URL) => {
       return Promise.reject(error);
     }
   );
-
-  const getUserProfile = () => {
-    return api.get(
-      NetworkConstants.AUTH_SERVICE +
-        NetworkConstants.API +
-        NetworkConstants.CONTROLLER_USER_PROFILE,
-      {},
-      { data: {} }
-    );
-  };
 
   const setUserIdHeader = (userId) => api.setHeader("X-User-id", userId);
 
@@ -93,7 +79,7 @@ const create = (baseURL = NetworkConstants.BASE_URL) => {
   //
   // I generally don't like wrapping the output at this level because
   // sometimes specific actions need to be take on `403` or `401`, etc.
-  //
+//
   // Since we can't hide from that, we embrace it by getting out of the
   // way at this level.
   //
@@ -117,8 +103,7 @@ const create = (baseURL = NetworkConstants.BASE_URL) => {
     removeAuthToken,
     setUserIdHeader,
     logOutUser,
-    removeUserHeader,
-    getUserProfile,
+    removeUserHeader
     // a list of the API functions from step 2
   };
 };

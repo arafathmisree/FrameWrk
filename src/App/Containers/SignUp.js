@@ -254,7 +254,7 @@ function SignUp(props) {
             ></Textfield>
           </div>
 
-          <div className="flex justify-between mt-8">
+          <div className="flex justify-between mt-4">
             <Button onClick={SignUp} type="primary">
               Sign up
             </Button>
