@@ -32,7 +32,7 @@ export function* signUpGoogle(api, action) {
     if (response.ok) {
       var resp = response.data.data;
       api.setAuthToken(resp.accessToken);
-      yield put(STARTUPACTIONS.signUpGoogle(action.token));
+      yield put(STARTUPACTIONS.signInGoogle(action.token));
     } else {
       yield put(STARTUPACTIONS.signInGoogleFailure(response.error));
     }
