@@ -3,4 +3,8 @@
  */
 export const INITIAL_STATE = {
   data: [],
+  user : {},
+  role : '',
+  error : '',
+  isAuthenticated : false
 };
