@@ -1,16 +1,13 @@
-import User from "../../Containers/User"
+import User from "../../Containers/User";
 import Profile from "../../Containers/Profile";
 
 const routes = [
   {
-    path: '/user/dashboard',
-    title: 'Home',
+    path: "/user/dashboard",
     auth: true,
-    roles: [
-      'user',
-    ],
+    roles: ["user"],
     exact: true,
-    component: User
+    component: User,
   },
   {
     path: '/user/profile',
@@ -26,11 +23,9 @@ const routes = [
     path: '/user/logout',
     title: 'Logout',
     auth: true,
-    roles: [
-      'user',
-    ],
+    roles: ["user"],
     exact: true,
-    component: Profile
+    component: Profile,
   },
-]
+];
 export default routes;
