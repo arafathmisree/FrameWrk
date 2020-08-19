@@ -22,11 +22,12 @@ function User(props) {
   );
 }
 
+
 const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch) => ({
   logOut: (user) => dispatch(StartupActions.logOut()),
-
+  
 });
 export default connect(mapStateToProps, mapDispatchToProps)(User);
 
