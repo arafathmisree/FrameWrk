@@ -1,12 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { NavTheme } from './NavStyles';
+import {Link, withRouter} from "react-router-dom";
+import StartupActions from "../../../Stores/Startup/Actions";
+import {connect} from "react-redux";
 
-function NavBar({items, color, role, isAuthenticated}) {
-    console.log("role",role)
-    console.log(isAuthenticated)
+
+function NavBar(props) {
+
+    const {items, color, role, isAuthenticated} = props
+    console.log("props",props)
     return (
-
             <header className={`${NavTheme[color]} shadow sm:flex sm:justify-between sm:items-center sm:px-4`}>
                 <div className="flex items-center justify-between px-4 py-1 sm:p-0 shadow md:shadow-none">
                     <div>
@@ -26,10 +30,16 @@ function NavBar({items, color, role, isAuthenticated}) {
 
                 <nav className="pt-2 pb-4 sm:flex sm:p-0">
                     {items.map((item,index)=>{
+
                             if (!isAuthenticated && item.auth==false){
-                                return <a key={index} href={item.path} className="block px-4 py-3 hover:opacity-75">{item.title}</a>
+                                return <Link to={item.path}> <a key={index} href="#" className="block px-4 py-3 hover:opacity-75">{item.title}</a>  </Link>
                             }else if (isAuthenticated && item.auth==true && (item.roles.find(roleItem=>roleItem==role) == role)){
-                                return <a key={index} href={item.path} className="block px-4 py-3 hover:opacity-75">{item.title}</a>
+                                if (item.path == "/user/logout"){
+                                    return <a  onClick={()=>props.logOut()} key={index} href="#" className="block px-4 py-3 hover:opacity-75">{item.title} </a>
+                                }else {
+                                    return <Link to={item.path}> <a key={index} href="#" className="block px-4 py-3 hover:opacity-75">{item.title}</a>  </Link>
+                                }
+
                             }
                         })
                     }
@@ -44,4 +54,13 @@ NavBar.propTypes = {
     role : PropTypes.string
 }
 
-export default NavBar;
+const mapStateToProps = (state) => ({
+
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    logOut: () => dispatch(StartupActions.logOut())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
+

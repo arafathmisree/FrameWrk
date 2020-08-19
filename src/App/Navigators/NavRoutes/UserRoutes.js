@@ -22,5 +22,15 @@ const routes = [
     exact: true,
     component: Profile
   },
+  {
+    path: '/user/logout',
+    title: 'Logout',
+    auth: true,
+    roles: [
+      'user',
+    ],
+    exact: true,
+    component: Profile
+  },
 ]
 export default routes;
