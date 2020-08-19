@@ -26,7 +26,6 @@ function NavBar({items, color,role}) {
                 <nav className="pt-2 pb-4 sm:flex sm:p-0">
                     {
                         items.map((item,index)=>{
-                            if (item.roles.find())
                             return <a key={index} href={item.path} className="block px-4 py-3 hover:opacity-75">{item.title}</a>
                         })
                     }

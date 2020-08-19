@@ -22,8 +22,9 @@ function Routes (props) {
 
 return (
     <div>
-      <NavBar {...props} />
-      <Switch>
+      {/*<NavBar {...props} />*/}
+        <DashboardContainer navbarItems={routes} role={props.role} />
+        <Switch>
       {routes.map((route, i) => {
         if (route.auth) {
           return <PrivateRoute key={i} {...route} role={props.role} props={props} />
