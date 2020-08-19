@@ -4,6 +4,7 @@ import Profile from "../../Containers/Profile";
 const routes = [
   {
     path: "/user/dashboard",
+    title: "dashboard",
     auth: true,
     roles: ["user"],
     exact: true,
