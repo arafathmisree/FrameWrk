@@ -39,7 +39,6 @@ function NavBar(props) {
                                 }else {
                                     return <Link to={item.path}> <a key={index} href="#" className="block px-4 py-3 hover:opacity-75">{item.title}</a>  </Link>
                                 }
-
                             }
                         })
                     }
