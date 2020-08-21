@@ -79,9 +79,11 @@ function Profile(props) {
             </div>
             <div className=" flex justify-center mt-2">
               <div className="rounded-full w-3/4">
+               {props.profile && props.profile.imageUrl ?
                 <ImageComponent
-                  image={props.profile ? props.profile.imageUrl : ""}
-                />
+                  image={ props.profile.imageUrl}
+                /> : null
+               }
               </div>
             </div>
             <div>

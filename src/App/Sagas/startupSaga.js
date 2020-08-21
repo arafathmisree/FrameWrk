@@ -64,7 +64,7 @@ export function* signUpFacebook(api, action) {
   
       console.log("acc", response);
       if (response.ok) {
-        yield put(STARTUPACTIONS.signInGoogle(action.token));
+        yield put(STARTUPACTIONS.signInFacebook(action.token));
       } else {
         yield put(STARTUPACTIONS.signInFacebookFailure(response.error));
       }
@@ -113,6 +113,7 @@ export function* loadData(api, action) {
     var user = JSON.parse(localStorage.getItem("user"));
     if (user) {
       api.setAuthToken(user.accessToken);
+      api.setUserIdHeader(user.userId);
       yield put(STARTUPACTIONS.loadDataSuccess());
     }
   } catch (err) {
