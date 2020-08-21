@@ -24,6 +24,23 @@ export function* signInGoogle(api, action) {
   }
 }
 
+export function* signInFacebook(api, action) {
+    try {
+      const response = yield call(api.faceBookSignIn, action.token);
+      console.log("acc", response);
+      if (response.ok) {
+        var resp = response.data.data;
+        api.setAuthToken(resp.accessToken);
+        api.setUserIdHeader(resp.userId);
+        yield put(STARTUPACTIONS.signInGoogleSuccess(resp));
+      } else {
+        yield put(STARTUPACTIONS.signInFacebookFailure(response.error));
+      }
+    } catch (err) {
+      yield put(STARTUPACTIONS.signInFacebookFailure(err));
+    }
+  }
+
 export function* signUpGoogle(api, action) {
   try {
     const response = yield call(api.googleSignUp, action.token);
@@ -40,6 +57,22 @@ export function* signUpGoogle(api, action) {
     yield put(STARTUPACTIONS.signInGoogleFailure(err.message));
   }
 }
+
+export function* signUpFacebook(api, action) {
+    try {
+      const response = yield call(api.faceBookSignUp, action.token);
+  
+      console.log("acc", response);
+      if (response.ok) {
+        yield put(STARTUPACTIONS.signInGoogle(action.token));
+      } else {
+        yield put(STARTUPACTIONS.signInFacebookFailure(response.error));
+      }
+    } catch (err) {
+      yield put(STARTUPACTIONS.signInFacebookFailure(err.message));
+    }
+  }
+
 
 export function* signInSuccess(api, action) {
   try {

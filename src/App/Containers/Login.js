@@ -29,8 +29,13 @@ function Login(props) {
 
   const handleSocialLogin = (user) => {
     if (user._token) {
+      var payload = {
+        accessToken : user._token.accessToken
+      }
+
       props.setUserData(user);
-      history.push("/dashboard");
+      props.signInFacebook(payload)
+   
     } else {
       alert("login error");
     }
@@ -148,9 +153,9 @@ function Login(props) {
               <SocialButton
                 provider="facebook"
                 appId="420968585473340"
+                scope={["email",""]}
                 onLoginSuccess={handleSocialLogin}
-                onLoginFailure={handleSocialLoginFailure}
-              >
+                onLoginFailure={handleSocialLoginFailure}>
                 Facebook
               </SocialButton>
 
@@ -184,6 +189,7 @@ const mapStateToProps = (state) => ({});
 const mapDispatchToProps = (dispatch) => ({
   setUserData: (user) => dispatch(StartupActions.setUserData(user)),
   signInGoogle: (token) => dispatch(StartupActions.signInGoogle(token)),
+  signInFacebook: (token) => dispatch(StartupActions.signInFacebook(token)),
   isAuthenticated : () => dispatch(StartupActions.isAuthenticated())
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

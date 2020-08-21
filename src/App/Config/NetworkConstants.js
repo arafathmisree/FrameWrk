@@ -9,6 +9,7 @@ const CONTROLLER_SIGNUP = "signup";
 const CONTROLLER_USER_PROFILE = "users";
 const SIGN_OUT = "sign-out";
 const USERS = "users/";
+const FACEBOOK_CONTROLLER = "facebook/";
 
 export default {
   BASE_URL,
@@ -20,4 +21,5 @@ export default {
   CONTROLLER_USER_PROFILE,
   USERS,
   SIGN_OUT,
+  FACEBOOK_CONTROLLER
 };

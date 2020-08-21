@@ -43,6 +43,26 @@ const create = (baseURL = NetworkConstants.BASE_URL) => {
     );
   };
 
+  const faceBookSignIn = (obj) => {
+    return api.post(
+      NetworkConstants.AUTH_SERVICE +
+        NetworkConstants.API +
+        NetworkConstants.FACEBOOK_CONTROLLER +
+        NetworkConstants.CONTROLLER_SIGNIN,
+      obj
+    );
+  };
+
+  const faceBookSignUp = (obj) => {
+    return api.post(
+      NetworkConstants.AUTH_SERVICE +
+        NetworkConstants.API +
+        NetworkConstants.FACEBOOK_CONTROLLER +
+        NetworkConstants.CONTROLLER_SIGNUP,
+      obj
+    );
+  };
+
   const logOutUser = () => {
     return api.get(
       NetworkConstants.AUTH_SERVICE +
@@ -119,6 +139,8 @@ const create = (baseURL = NetworkConstants.BASE_URL) => {
     logOutUser,
     removeUserHeader,
     getUserProfile,
+    faceBookSignIn,
+    faceBookSignUp
     // a list of the API functions from step 2
   };
 };

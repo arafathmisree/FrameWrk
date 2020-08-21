@@ -8,6 +8,8 @@ import {
   logOutUser,
   signInSuccess,
   loadData,
+  signUpFacebook,
+  signInFacebook
 } from "./startupSaga";
 import API from "../Services/Api";
 import { userProfile } from "./profileSaga";
@@ -23,4 +25,6 @@ export default function* root() {
 
   yield all([takeLatest(PROFILE.USER_PROFILE, userProfile, api)]);
   yield all([takeLatest(STARTUP.LOAD_DATA, loadData, api)]);
+  yield all([takeLatest(STARTUP.SIGN_UP_FACEBOOK, signUpFacebook, api)]);
+  yield all([takeLatest(STARTUP.SIGN_IN_FACEBOOK, signInFacebook, api)]);
 }

@@ -61,6 +61,24 @@ export const checkAuthenticated = (state) => ({
 user: !!localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {}
 });
 
+export const signUpFacebook = (state,{ token }) => ({
+  ...state,
+});
+
+export const signInFacebook = (state,{ token }) => ({
+  ...state,
+
+});
+
+export const signInFacebookSuccess = (state,{ data }) => ({
+  ...state,
+  user : data 
+});
+
+export const signInFacebookFailure = (state,{ error }) => ({
+  ...state,
+});
+
 export const reducer = createReducer(INITIAL_STATE, {
   [STARTUP.LOAD_DATA]: loadData,
   [STARTUP.SET_USER_DATA]: setUserData,
@@ -71,5 +89,9 @@ export const reducer = createReducer(INITIAL_STATE, {
   [STARTUP.SIGN_UP_GOOGLE]: signUpGoogle,
   [STARTUP.LOG_OUT_SUCCESS]: logOutSuccess,
   [STARTUP.LOG_OUT_FAILURE]: logOutFailure,
-  [STARTUP.CHECK_AUTHENTICATED]: checkAuthenticated
+  [STARTUP.CHECK_AUTHENTICATED]: checkAuthenticated,
+  [STARTUP.SIGN_IN_FACEBOOK]: signInFacebook,
+  [STARTUP.SIGN_IN_FACEBOOK_SUCCESS]: signInFacebookSuccess,
+  [STARTUP.SIGN_IN_FACEBOOK_FAILURE]: signInFacebookFailure,
+  [STARTUP.SIGN_UP_FACEBOOK]: signUpFacebook,
 });

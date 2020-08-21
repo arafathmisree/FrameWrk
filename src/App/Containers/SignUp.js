@@ -78,7 +78,19 @@ function SignUp(props) {
 
   const [formState, setFields] = useState(fields);
 
-  const handleSocialLogin = (user) => {};
+  const handleSocialLogin = (user) => {
+    if (user._token) {
+      var payload = {
+        accessToken : user._token.accessToken
+      }
+
+      props.signUpFacebook(payload)
+   
+    } else {
+      alert("login error");
+    }
+    console.log(user);
+  };
 
   const handleSocialLoginFailure = (err) => {};
 
@@ -304,6 +316,7 @@ const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch) => ({
   signUp: (token) => dispatch(StartupActions.signUpGoogle(token)),
+  signUpFacebook: (token) => dispatch(StartupActions.signUpFacebook(token)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
 
