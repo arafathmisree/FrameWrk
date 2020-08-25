@@ -18,7 +18,8 @@ const {Types, Creators} = createActions({
   signInFacebook : ['token'],
   signInFacebookSuccess : ['data'],
   signInFacebookFailure : ['error'],
-  signUpFacebook: ['token']
+  signUpFacebook: ['token'],
+  loadDataFailure: null,
 });
 
 export const STARTUP = Types;

@@ -112,9 +112,18 @@ export function* loadData(api, action) {
   try {
     var user = JSON.parse(localStorage.getItem("user"));
     if (user) {
-      api.setAuthToken(user.accessToken);
-      api.setUserIdHeader(user.userId);
-      yield put(STARTUPACTIONS.loadDataSuccess());
+        api.setAuthToken(user.accessToken);
+        api.setUserIdHeader(user.userId);
+
+      const response = yield call(api.validateToken);
+      console.log('response',response)
+      if (response.ok) {
+       
+        yield put(STARTUPACTIONS.loadDataSuccess());
+      }else {
+        yield put(STARTUPACTIONS.logOut());
+      }
+     
     }
   } catch (err) {
     console.log(err);
