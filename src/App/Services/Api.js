@@ -53,6 +53,18 @@ const create = (baseURL = NetworkConstants.BASE_URL) => {
     );
   };
 
+  const validateToken = () => {
+    return api.get(
+      NetworkConstants.AUTH_SERVICE +
+        NetworkConstants.API +
+        NetworkConstants.TOKEN +
+        NetworkConstants.VALIDATE,
+      {},
+      { data: {} }
+    );
+  };
+
+
   const faceBookSignUp = (obj) => {
     return api.post(
       NetworkConstants.AUTH_SERVICE +
@@ -140,7 +152,8 @@ const create = (baseURL = NetworkConstants.BASE_URL) => {
     removeUserHeader,
     getUserProfile,
     faceBookSignIn,
-    faceBookSignUp
+    faceBookSignUp,
+    validateToken
     // a list of the API functions from step 2
   };
 };
