@@ -8,8 +8,10 @@
     "@testing-library/user-event": "^7.1.2",
     "apisauce": "^1.1.1",
     "axios": "^0.19.2",
+    "chart.js": "^2.9.3",
     "connected-react-router": "^6.8.0",
     "react": "^16.13.1",
+    "react-chartjs-2": "^2.10.0",
     "react-dom": "^16.13.1",
     "react-google-login": "^5.1.21",
     "react-image": "^4.0.3",
@@ -52,6 +54,6 @@
   "devDependencies": {
     "autoprefixer": "^9.8.6",
     "postcss-cli": "^7.1.1",
-    "tailwindcss": "^1.6.2"
+    "tailwindcss": "^1.7.3"
   }
 }

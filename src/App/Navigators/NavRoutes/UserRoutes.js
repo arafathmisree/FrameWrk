@@ -1,5 +1,6 @@
 import User from "../../Containers/User";
 import Profile from "../../Containers/Profile";
+import Charts from "../../Containers/Charts";
 
 const routes = [
   {
@@ -19,6 +20,14 @@ const routes = [
     ],
     exact: true,
     component: Profile
+  },
+  {
+    path: '/user/charts',
+    title: 'Charts',
+    auth: true,
+    roles: ["user"],
+    exact: true,
+    component: Charts,
   },
   {
     path: '/user/logout',

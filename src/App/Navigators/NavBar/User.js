@@ -10,6 +10,9 @@ const User = ({match}) => (
                 <Link to="/user/profile">Profile</Link>
             </li>
             <li>
+                <Link to="/user/charts">Charts</Link>
+            </li>
+            <li>
                 <Link to="/admin">Try admin</Link>
             </li> 
         
