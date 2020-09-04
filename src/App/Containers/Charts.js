@@ -9,7 +9,7 @@ import { Card } from "../Components/atoms/Card";
 function Charts() {
 
   return (
-    <div className="flex  p-8 md:pt-24">
+    <div className="flex p-8">
       <Card type="primary" size="small">
         <Chart type="doughnut" data={doughnut}/>
       </Card> 
@@ -25,7 +25,7 @@ function Charts() {
       <Card type="primary" size="small">
           <Chart type="line" data={line}/>
       </Card>
-
+ 
     </div>
   );
 }
