@@ -16,3 +16,17 @@ export function* userProfile(api, action) {
     yield put(PROFILEACTIONS.userProfileFailure(err));
   }
 }
+
+export function* userProfileUpdate(api, action) {
+  try {
+    const response = yield call(api.userProfileUpdate);
+    console.log("** USER PROFILE UPDATE CALL **", response);
+    if (response.ok) {
+      yield put(PROFILEACTIONS.userProfileUpdateSuccess(response.data.data));
+    } else {
+      yield put(PROFILEACTIONS.userProfileUpdateFailure(response.error));
+    }
+  } catch (err) {
+    yield put(PROFILEACTIONS.userProfileUpdateFailure(err));
+  }
+}
