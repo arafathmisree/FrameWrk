@@ -1,24 +1,25 @@
-import React from "react";
+import React, { Suspense, Component } from "react";
 import NavBar from "../../atoms/Navbar/Navbar";
 import StartupActions from "../../../Stores/Startup/Actions";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import SideBar from '../../atoms/SideBar/';
+import Main from "./Main";
+import RouteSuspense from "../../../Navigators/Layout/RouteSuspense";
+import { Switch, Route, Redirect } from "react-router-dom";
 
 
 
-function DashboardContainer (props) {
-    const { navbarItems, role, authenticated } = props
- 
-    return (<div className="pvt-layout flex h-screen bg-gray-50 dark:bg-gray-900" style={{ minHeight: '100vh'}}>
+function DashboardContainer (props) { 
+    const {  role, authenticated, routes } = props
+    const isSidebarOpen = true;
+
+    return (
+        <div className={`pvt-layout flex h-screen bg-gray-50 dark:bg-gray-900 ${isSidebarOpen && 'overflow-hidden'}`}>
             <SideBar {...props} items={props.routes} role={props.role}  />
             <div className="flex flex-col flex-1 w-full">
-            <NavBar color="dark" items={navbarItems} role={role}  isAuthenticated={authenticated} />
-                <main className="h-full overflow-y-auto">
-                    <div className="px-6 mx-auto grid"> 
-                        { props.children }
-                    </div>
-                </main>
+                <NavBar color="dark" items={routes} role={role}  isAuthenticated={authenticated} />
+                <Main {...props}/>
             </div>
         </div>
     )
