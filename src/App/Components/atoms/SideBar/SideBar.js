@@ -1,29 +1,15 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useState} from 'react';
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 
-import { Link } from 'react-router-dom';
-
-
+import { Link, NavLink } from 'react-router-dom';
 
 const SideBar = ( props ) => {
     const {items, color, role, isAuthenticated} = props 
+   
+     
 
-    const checkActiveMenu = function(routerPath, equal=false) {
-        const { pathname } =  props.location;
-        console.log('Router', routerPath, pathname);
-        if (equal) {
-          return (pathname === routerPath 
-            ?  (<span className="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>)
-            : '')
-        } else {
-          return (pathname.includes(routerPath) 
-          ? <span className="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span> 
-          : '')
-        }
-      };
-
-    return ( 
+    return (  
     <aside className="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0">
         <div className="py-4 text-gray-500 dark:text-gray-400">
             <a className="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="#logo" > Swivel App </a>
@@ -41,16 +27,12 @@ const SideBar = ( props ) => {
             <ul>
             {
                 items.map((item,index) => {
-                    
-                    
-
                     if (!isAuthenticated && item.auth===false){
-                        return <Link to={item.path} key={index} className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">{item.title} </Link>
+                        return <NavLink to={item.path} key={index} className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">{item.title}</NavLink>
                     }else if (isAuthenticated && item.auth==true && (item.roles.find(roleItem=>roleItem==role) == role)){
                         
-                        return ( <li className="relative px-6 py-3">
-                             { checkActiveMenu(item.path) }
-                        <Link 
+                        return ( <li className="relative px-6 py-3"> 
+                        <NavLink 
                             to={item.path} 
                             key={index} 
                             className={`inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 ${'active'}`} href="forms.html">
@@ -58,7 +40,7 @@ const SideBar = ( props ) => {
                             <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
                             </svg>
                             <span className="ml-4">{item.title}</span>
-                        </Link>
+                        </NavLink>
                         </li>);
                     } else {
                         return ''

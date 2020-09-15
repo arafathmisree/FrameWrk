@@ -10,7 +10,7 @@ const propTypes = {
 }
 
 function PrivateLayout(props ) {
-return <DashboardContainer {...props} navbarItems={props.routes} role={props.role} authenticated={props.isAuthenticated}  />
+return <DashboardContainer {...props} routes={props.routes} role={props.role} authenticated={props.isAuthenticated}  />
 }
 
 PrivateLayout.propTypes = propTypes
