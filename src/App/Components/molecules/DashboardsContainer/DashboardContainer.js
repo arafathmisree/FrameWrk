@@ -30,7 +30,8 @@ DashboardContainer.propTypes = {
     navbarColor : PropTypes.array,
     navbarClases : PropTypes.object,
     role : PropTypes.string,
-    authenticated : PropTypes.bool
+    authenticated : PropTypes.bool,
+    children : PropTypes.node
 }
 
 

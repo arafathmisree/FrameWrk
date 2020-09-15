@@ -70,7 +70,7 @@ function Profile(props) {
   return (
     props.profile && (
       <div>
-        <div className="flex justify-center p-8 md:pt-24">
+        <div className="flex p-8 ">
           <Card type="primary" size="small">
             <div className="flex justify-center">
               <Typography color="primary" type="h1">

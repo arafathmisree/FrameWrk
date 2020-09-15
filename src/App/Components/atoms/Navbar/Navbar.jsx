@@ -9,12 +9,12 @@ import {connect} from "react-redux";
 function NavBar(props) {
 
     const {items, color, role, isAuthenticated} = props
-    console.log("props",props)
+    console.log("props222",props)
     return (
             <header className={`${NavTheme[color]} shadow sm:flex sm:justify-between sm:items-center sm:px-4`}>
                 <div className="flex items-center justify-between px-4 py-1 sm:p-0 shadow md:shadow-none">
                     <div>
-                        <a href="#" className="block py-3">Logo</a>
+                        <a href="#" className="block py-3"></a>
                     </div>
 
                     <div className="md:hidden">
