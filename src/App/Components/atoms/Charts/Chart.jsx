@@ -1,12 +1,12 @@
 import React from "react";
  
-import DoughnutChart from "./Doughnut"
-import PieChart from "./Pie"
-import BarChart from "./Bar"
-import LineChart from "./Line"
+import { 
+  DoughnutChart,
+  PieChart, 
+  BarChart, 
+  LineChart } from "./types"
 
 export default function Chart({ type, data, width, height, options }){
-  console.log(type);
   if(type){
     switch (type) {
       case "doughnut":
