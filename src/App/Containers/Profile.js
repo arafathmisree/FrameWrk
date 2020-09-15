@@ -25,14 +25,22 @@ let inputElement = "";
 function Profile(props) {
   //Default Picture
 
-  const [picture, setPicture] = useState("");
+  const [picture, setPicture] = useState(
+    props.profile ? props.profile.imageUrl : ""
+  );
   const [fname, setFname] = useState("");
-  const [email, setEmail] = useState("");
+  const [lname, setLname] = useState("");
+  const [email, setEmail] = useState(props.profile ? props.profile.email : "");
+  const [phone, setPhone] = useState(
+    props.profile
+      ? props.profile.mobileNo.countryCode + props.profile.mobileNo.localNumber
+      : ""
+  );
 
   // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
     props.userProfile();
-  }, [setPicture, setFname, setEmail]);
+  }, [setPicture, setFname, setEmail, setPhone]);
 
   function onUploadClick(e) {
     e.target.value = null;
@@ -67,6 +75,42 @@ function Profile(props) {
     });
   }
 
+  function onTextChange(event) {
+    const value = event.target.value;
+    const name = event.target.name;
+    switch (name) {
+      case "fname":
+        setFname(value);
+        break;
+      case "lname":
+        setLname(value);
+        break;
+      case "phone":
+        setPhone(value);
+        break;
+      default:
+    }
+  }
+
+  function onUpdate() {
+    if (!fname || !lname || !phone) {
+      alert("Required Fields should not be empty");
+      return;
+    }
+    const data = {
+      fullName: `${fname} ${lname}`,
+      mobileNo: {
+        countryCode: "+94",
+        localNumber: phone,
+        displayNumber: null,
+      },
+      imageUrl: picture,
+      language: "ENGLISH",
+    };
+
+    props.userProfileUpdate(data);
+  }
+
   return (
     props.profile && (
       <div>
@@ -79,11 +123,9 @@ function Profile(props) {
             </div>
             <div className=" flex justify-center mt-2">
               <div className="rounded-full w-3/4">
-               {props.profile && props.profile.imageUrl ?
-                <ImageComponent
-                  image={ props.profile.imageUrl}
-                /> : null
-               }
+                {props.profile && props.profile.imageUrl ? (
+                  <ImageComponent image={picture} />
+                ) : null}
               </div>
             </div>
             <div>
@@ -109,8 +151,10 @@ function Profile(props) {
             <div className="mt-4">
               <Textfield
                 label="First name"
-                value={props.profile ? props.profile.fullName : ""}
+                value={props.profile ? fname : ""}
+                name={"fname"}
                 placeholder="First name"
+                onChange={onTextChange}
                 type="primary"
                 size="sm"
               ></Textfield>
@@ -118,7 +162,10 @@ function Profile(props) {
             <div className="mt-4">
               <Textfield
                 label="Last name"
+                value={props.profile ? lname : ""}
+                name={"lname"}
                 placeholder="Last name"
+                onChange={onTextChange}
                 type="primary"
                 size="sm"
               ></Textfield>
@@ -135,7 +182,7 @@ function Profile(props) {
               <Textfield
                 label="Email"
                 disabled={true}
-                value={props.profile ? props.profile.email : ""}
+                value={props.profile ? email : ""}
                 placeholder="Email"
                 type="primary"
                 size="sm"
@@ -144,7 +191,10 @@ function Profile(props) {
             <div className="mt-4">
               <Textfield
                 label="Mobile Number"
+                value={props.profile ? phone : ""}
+                name={"phone"}
                 placeholder="Mobile Number"
+                onChange={onTextChange}
                 type="primary"
                 size="sm"
               ></Textfield>
@@ -175,7 +225,11 @@ function Profile(props) {
             </div>
 
             <div className="flex mt-8">
-              <Button type="primary" className="mr-2 flex-grow">
+              <Button
+                type="primary"
+                className="mr-2 flex-grow"
+                onClick={onUpdate}
+              >
                 Save
               </Button>
               <Button type="danger" className="ml-2 flex-grow">
