@@ -80,6 +80,16 @@ export const signInFacebookFailure = (state,{ error }) => ({
   ...state,
 });
 
+export const setNotificationCount = (state) => ({
+  ...state,
+  notificationCount : state.notificationCount + 1 
+});
+
+export const clearNotifications = (state) => ({
+  ...state,
+  notificationCount : 0
+});
+
 export const reducer = createReducer(INITIAL_STATE, {
   [STARTUP.LOAD_DATA]: loadData,
   [STARTUP.SET_USER_DATA]: setUserData,
@@ -95,4 +105,6 @@ export const reducer = createReducer(INITIAL_STATE, {
   [STARTUP.SIGN_IN_FACEBOOK_SUCCESS]: signInFacebookSuccess,
   [STARTUP.SIGN_IN_FACEBOOK_FAILURE]: signInFacebookFailure,
   [STARTUP.SIGN_UP_FACEBOOK]: signUpFacebook,
+  [STARTUP.SET_NOTIFICATION_COUNT]: setNotificationCount,
+  [STARTUP.CLEAR_NOTIFICATIONS]: signUpFacebook,
 });

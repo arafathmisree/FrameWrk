@@ -1,14 +1,14 @@
-import React ,{useEffect}from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import Routes from "./Routes/index";
 import StartupActions from "./Stores/Startup/Actions";
-
+import { messaging } from "./init-fcm";
 
 function Root(props) {
+  useEffect( () => {
+    props.loadData();
 
-
-  useEffect(() => {
-    props.loadData()
+   
   });
 
   return <Routes />;
@@ -16,13 +16,11 @@ function Root(props) {
 
 const mapStateToProps = (state) => ({
   role: state.startup.role,
-  isAuthenticated: state.startup.isAuthenticated
+  isAuthenticated: state.startup.isAuthenticated,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loadData : () => dispatch(StartupActions.loadData())
+  loadData: () => dispatch(StartupActions.loadData()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Root);
-
-

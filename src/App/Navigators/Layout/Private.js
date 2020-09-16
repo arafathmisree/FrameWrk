@@ -9,6 +9,10 @@ const propTypes = {
   children: PropTypes.node.isRequired,
 }
 
+
+
+
+
 function PrivateLayout(props ) {
 return <DashboardContainer {...props} routes={props.routes} role={props.role} authenticated={props.isAuthenticated}  />
 }

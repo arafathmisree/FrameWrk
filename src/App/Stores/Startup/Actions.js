@@ -20,6 +20,8 @@ const {Types, Creators} = createActions({
   signInFacebookFailure : ['error'],
   signUpFacebook: ['token'],
   loadDataFailure: null,
+  setNotificationCount: null,
+  clearNotifications : null
 });
 
 export const STARTUP = Types;

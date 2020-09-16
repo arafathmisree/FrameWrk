@@ -6,5 +6,6 @@ export const INITIAL_STATE = {
   user : {},
   role : '',
   error : '',
-  isAuthenticated : false
+  isAuthenticated : false,
+  notificationCount : 0
 };
