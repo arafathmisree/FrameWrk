@@ -41,10 +41,11 @@ function NavBar(props) {
       </div>
 
       <nav className="pt-2 pb-4 sm:flex sm:p-0">
-        <Badge  count={cn}>
-        <FontAwesomeIcon  icon={faBell} />
-          
-        </Badge>
+        <a href="#" className="flex items-center relative">
+            <Badge count={cn}>
+                    <FontAwesomeIcon size="lg" icon={faBell} className="w-24" />  
+            </Badge>
+        </a>
 
         {items.map((item, index) => {
           if (!isAuthenticated && item.auth == false) {

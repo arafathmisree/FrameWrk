@@ -7,7 +7,9 @@ function Badge({ count, children }) {
   return (
     <div>
      {children}
-     <NotificationBadge count={count} effect={Effect.SCALE} />
+     <div className="absolute top-0 ml-6 mt-2">
+      <NotificationBadge count={count} effect={Effect.SCALE} />
+     </div>
     </div>
   );
 }
