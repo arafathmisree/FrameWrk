@@ -3,10 +3,11 @@ import NotificationBadge from "react-notification-badge";
 import { Effect } from "react-notification-badge";
 import PropTypes from "prop-types";
 
-function Badge({ count }) {
+function Badge({ count, children }) {
   return (
     <div>
-      <NotificationBadge count={count} effect={Effect.SCALE} />
+     {children}
+     <NotificationBadge count={count} effect={Effect.SCALE} />
     </div>
   );
 }
@@ -18,6 +19,7 @@ Badge.propTypes = {
   style: PropTypes.object,
   className: PropTypes.string,
   effect: PropTypes.array,
-  duration: PropTypes.number
+  duration: PropTypes.number,
+  children: PropTypes.node,
 };
 export default Badge;
