@@ -53,12 +53,11 @@ const create = (baseURL = NetworkConstants.BASE_URL) => {
     );
   };
 
-  const validateToken = () => {
+  const validateToken = (tks) => {
     return api.get(
       NetworkConstants.AUTH_SERVICE +
-        NetworkConstants.API +
-        NetworkConstants.TOKEN +
-        NetworkConstants.VALIDATE,
+        NetworkConstants.OAUTH +
+        NetworkConstants.CKTOKEN+ "?token="+tks,
       {},
       { data: {} }
     );
@@ -122,6 +121,8 @@ const create = (baseURL = NetworkConstants.BASE_URL) => {
 
   const setAuthToken = (userAuth) =>
     api.setHeader("Authorization", "Bearer " + userAuth);
+    const setBasicToken = (userAuth) =>
+    api.setHeader("Authorization", "Basic " + NetworkConstants.BASICTK);
   const removeAuthToken = () => api.deleteHeader("Authorization");
   // ------
   // STEP 2
@@ -163,6 +164,7 @@ const create = (baseURL = NetworkConstants.BASE_URL) => {
     faceBookSignIn,
     faceBookSignUp,
     validateToken,
+    setBasicToken
     // a list of the API functions from step 2
   };
 };
