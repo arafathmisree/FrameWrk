@@ -1,7 +1,8 @@
 import { put, call, select, delay } from "redux-saga/effects";
 import STARTUPACTIONS from "../Stores/Startup/Actions";
 import { push } from "connected-react-router";
-import { HistoryWrapper } from "../Navigators/HostoryWrapper";
+import {history } from '../Stores/CreateStore'
+
 
 //Saga for business logic handling
 
@@ -78,7 +79,9 @@ export function* signInSuccess(api, action) {
   try {
     var role = "user";
     yield put(STARTUPACTIONS.setRole(role));
-    yield put(push(`${role}/dashboard`));
+    // yield put(push(`${role}/dashboard`));
+    history.push(`user/dashboard`)
+
     // HistoryWrapper.history.push('/user');
   } catch (err) {}
 }
@@ -112,18 +115,15 @@ export function* loadData(api, action) {
   try {
     var user = JSON.parse(localStorage.getItem("user"));
     if (user) {
-      api.setBasicToken()
-      api.removeUserHeader()
-      const response = yield call(api.validateToken,user.accessToken);
-      console.log('response',response)
-      if (response.ok) {
-        api.removeAuthToken()
         api.setAuthToken(user.accessToken);
         api.setUserIdHeader(user.userId);
 
+      const response = yield call(api.validateToken);
+      console.log('response',response)
+      if (response.ok) {
+       
         yield put(STARTUPACTIONS.loadDataSuccess());
       }else {
-        api.removeAuthToken()
         yield put(STARTUPACTIONS.logOut());
       }
      
