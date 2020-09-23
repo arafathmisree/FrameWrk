@@ -10,7 +10,6 @@ import { faBell } from '@fortawesome/free-solid-svg-icons'
 
 function NavBar(props) {
   const { items, color, role, isAuthenticated } = props;
-  console.log("props222", props);
 
   const [cn, setCount] = useState(0);
 
@@ -23,7 +22,7 @@ function NavBar(props) {
     >
       <div className="flex items-center justify-between px-4 py-1 sm:p-0 shadow md:shadow-none">
         <div>
-          <a href="#" className="block py-3"></a>
+          <Link to="#" className="block py-3"></Link>
         </div>
 
         <div className="md:hidden">
@@ -41,24 +40,22 @@ function NavBar(props) {
       </div>
 
       <nav className="pt-2 pb-4 sm:flex sm:p-0">
-        <a href="#" className="flex items-center relative">
+        <Link to="#" className="flex items-center relative">
             <Badge count={cn}>
                     <FontAwesomeIcon size="lg" icon={faBell} className="w-24" />  
             </Badge>
-        </a>
+        </Link>
 
         {items.map((item, index) => {
           if (!isAuthenticated && item.auth == false) {
-            return (
-              <Link to={item.path}>
-                {" "}
-                <a
+            return ( 
+                <Link
+                  to={item.path}
                   key={index}
                   href="#"
                   className="block px-4 py-3 hover:opacity-75"
                 >
-                  {item.title}
-                </a>{" "}
+                  {item.title} 
               </Link>
             );
           } else if (
@@ -68,26 +65,23 @@ function NavBar(props) {
           ) {
             if (item.path == "/user/logout") {
               return (
-                <a
+                <Link
                   onClick={() => props.logOut()}
                   key={index}
                   href="#"
                   className="block px-4 py-3 hover:opacity-75"
                 >
                   {item.title}{" "}
-                </a>
+                </Link>
               );
             } else {
               return (
-                <Link to={item.path}>
-                  {" "}
-                  <a
+                <Link to={item.path} 
                     key={index}
                     href="#"
                     className="block px-4 py-3 hover:opacity-75"
                   >
                     {item.title}
-                  </a>{" "}
                 </Link>
               );
             }

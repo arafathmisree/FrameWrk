@@ -13,6 +13,7 @@ export function* signInGoogle(api, action) {
     const response = yield call(api.googleSignIn, action.token);
     console.log("acc", response);
     if (response.ok) {
+      localStorage.setItem('refresh_token', JSON.stringify(response.data.refresh_token))
       var resp = response.data.data;
       api.setAuthToken(resp.accessToken);
       api.setUserIdHeader(resp.userId);
@@ -77,11 +78,9 @@ export function* signUpFacebook(api, action) {
 
 export function* signInSuccess(api, action) {
   try {
-    var role = "user";
-    yield put(STARTUPACTIONS.setRole(role));
-    // yield put(push(`${role}/dashboard`));
-    history.push(`user/dashboard`)
-
+    yield put(STARTUPACTIONS.setRole());
+    let state = yield select();
+    yield put(push(`${state.startup.role}/dashboard`));
     // HistoryWrapper.history.push('/user');
   } catch (err) {}
 }
@@ -122,7 +121,7 @@ export function* loadData(api, action) {
       console.log('response',response)
       if (response.ok) {
        
-        yield put(STARTUPACTIONS.loadDataSuccess());
+        yield put(STARTUPACTIONS.loadDataSuccess(user));
       }else {
         yield put(STARTUPACTIONS.logOut());
       }

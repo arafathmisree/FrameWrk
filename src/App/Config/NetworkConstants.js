@@ -15,6 +15,7 @@ const OAUTH = "oauth/"
 const VALIDATE = "validate"
 const CKTOKEN  = "check_token"
 const BASICTK = "dG9rb21vYmlsZToxYWVhZDZjZS03MTk5LTQwODgtYTY0ZS04MTgyNDRjNWJlZmY="
+const REFRESH_TOKEN = "token";
 
 export default {
   BASE_URL,
@@ -31,5 +32,6 @@ export default {
   VALIDATE,
   OAUTH,
   CKTOKEN,
-  BASICTK
+  BASICTK,
+  REFRESH_TOKEN
 };

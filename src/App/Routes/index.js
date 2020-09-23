@@ -73,6 +73,7 @@ function Routes(props) {
       <Layout {...props} routes={routes}>
         <Switch>
           {routes.map((route, i) => {
+            console.log('Auth', route.auth);
             if (route.auth) {
               return (
                 <PrivateRoute
@@ -85,7 +86,7 @@ function Routes(props) {
             }
             return <PublicRoute key={i} {...route} {...props} />;
           })}
-          <Route render={() => <Redirect to="/404" />} />
+          {/* <Route render={() => <Redirect to="/404" />} /> */}
         </Switch>
       </Layout>
     </Router>
