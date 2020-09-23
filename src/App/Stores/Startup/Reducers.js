@@ -1,6 +1,6 @@
-import {INITIAL_STATE} from './InitialState';
-import {createReducer} from 'reduxsauce';
-import {STARTUP} from './Actions';
+import { INITIAL_STATE } from './InitialState';
+import { createReducer } from 'reduxsauce';
+import { STARTUP } from './Actions';
 
 
 /**
@@ -14,81 +14,92 @@ export const loadData = (state) => ({
 
 
 
-export const setUserData = (state,{ user }) => ({
-    ...state,
-    user
-  });
+export const setUserData = (state, { user }) => ({
+  ...state,
+  user
+});
 
-export const signInGoogle = (state,{ token }) => ({
+export const signInGoogle = (state, { token }) => ({
   ...state,
 
 });
 
-export const signUpGoogle = (state,{ token }) => ({
+export const signUpGoogle = (state, { token }) => ({
   ...state,
 });
 
-export const signInGoogleSuccess = (state,{ data }) => ({
+export const signInGoogleSuccess = (state, { data }) => ({
   ...state,
-  user : data 
+  user: data
 });
 
-export const signInGoogleFailure = (state,{ error }) => ({
+export const signInGoogleFailure = (state, { error }) => ({
   ...state,
 });
 
-export const setRole = (state,{ role }) => {
+export const setRole = (state) => { 
   localStorage.setItem('user', JSON.stringify(state.user))
-  localStorage.setItem('role', role)
-    return ({
-      ...state,
-      role
-    })
-  };
-
+  return ({
+    ...state,
+    isAuthenticated: !!localStorage.getItem('user'),
+    role: state.user.role ? state.user.role : 'user'  //remove the "if" condition after testing
+  })
+};
+ 
 
 export const logOutSuccess = (state) => ({
   ...state,
   ...INITIAL_STATE
 });
-export const logOutFailure = (state,{ error }) => ({
+export const logOutFailure = (state, { error }) => ({
   ...state,
 });
 
 export const checkAuthenticated = (state) => ({
   ...state,
   isAuthenticated: !!localStorage.getItem('user'),
-  role: localStorage.getItem('role'),
-user: !!localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {}
+  user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {},
+  role: !!localStorage.getItem('user') ? 'user' : 'user'
 });
 
-export const signUpFacebook = (state,{ token }) => ({
+export const signUpFacebook = (state, { token }) => ({
   ...state,
 });
 
-export const signInFacebook = (state,{ token }) => ({
+export const signInFacebook = (state, { token }) => ({
   ...state,
 
 });
 
-export const signInFacebookSuccess = (state,{ data }) => ({
+export const signInFacebookSuccess = (state, { data }) => ({
   ...state,
-  user : data 
+  user: data
 });
 
-export const signInFacebookFailure = (state,{ error }) => ({
+export const signInFacebookFailure = (state, { error }) => ({
   ...state,
 });
 
 export const setNotificationCount = (state) => ({
   ...state,
-  notificationCount : state.notificationCount + 1 
+  notificationCount: state.notificationCount + 1
 });
 
 export const clearNotifications = (state) => ({
   ...state,
-  notificationCount : 0
+  notificationCount: 4
 });
+/**
+ * TODO
+ * Retry Token 
+ */
+export const retryRequest = (state, { data }) => ({
+  ...state,
+  user: data
+})
+
+
+
 
 export const reducer = createReducer(INITIAL_STATE, {
   [STARTUP.LOAD_DATA]: loadData,
@@ -107,4 +118,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [STARTUP.SIGN_UP_FACEBOOK]: signUpFacebook,
   [STARTUP.SET_NOTIFICATION_COUNT]: setNotificationCount,
   [STARTUP.CLEAR_NOTIFICATIONS]: signUpFacebook,
+  [STARTUP.RETRY_REQUEST]: retryRequest
 });

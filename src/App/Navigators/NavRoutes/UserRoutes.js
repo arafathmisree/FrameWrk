@@ -5,7 +5,7 @@ import Charts from "../../Containers/Charts";
 const routes = [
   {
     path: "/user/dashboard",
-    title: "dashboard",
+    title: "Dashboard",
     auth: true,
     roles: ["user"],
     exact: true,

@@ -25,9 +25,7 @@ let inputElement = "";
 function Profile(props) {
   //Default Picture
 
-  const [picture, setPicture] = useState(
-    props.profile ? props.profile.imageUrl : ""
-  );
+  const [picture, setPicture] = useState("");
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [email, setEmail] = useState(props.profile ? props.profile.email : "");
@@ -39,8 +37,15 @@ function Profile(props) {
 
   // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
-    props.userProfile();
-  }, [setPicture, setFname, setEmail, setPhone]);
+    if (props.profile) {
+      setPicture(props.profile.imageUrl)
+      setFname()
+      setEmail()
+      setPhone()
+    } else {
+      props.userProfile();
+    }
+  }, [props.profile]);
 
   function onUploadClick(e) {
     e.target.value = null;
@@ -123,7 +128,7 @@ function Profile(props) {
             </div>
             <div className=" flex justify-center mt-2">
               <div className="rounded-full w-3/4">
-                {props.profile && props.profile.imageUrl ? (
+                {picture ? (
                   <ImageComponent image={picture} />
                 ) : null}
               </div>

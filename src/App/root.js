@@ -6,10 +6,9 @@ import { messaging } from "./init-fcm";
 
 function Root(props) {
   useEffect( () => {
+    if (!props.role == "") return
     props.loadData();
-
-   
-  });
+  },[]);
 
   return <Routes />;
 }

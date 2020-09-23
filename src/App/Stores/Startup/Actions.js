@@ -5,7 +5,7 @@ import {createActions} from 'reduxsauce';
 const {Types, Creators} = createActions({
   loadData: null,
   setUserData : ['user'],
-  setRole : ['role'],
+  setRole : null,
   signInGoogle : ['token'],
   signInGoogleSuccess : ['data'],
   signInGoogleFailure : ['error'],
@@ -21,7 +21,8 @@ const {Types, Creators} = createActions({
   signUpFacebook: ['token'],
   loadDataFailure: null,
   setNotificationCount: null,
-  clearNotifications : null
+  clearNotifications : null,
+  retryRequest: ['data']
 });
 
 export const STARTUP = Types;

@@ -1,7 +1,7 @@
 // a library to wrap and simplify api calls
 import apisauce from "apisauce";
 import NetworkConstants from "../Config/NetworkConstants";
-
+import qs from 'query-string'
 // our "constructor"
 const create = (baseURL = NetworkConstants.BASE_URL) => {
   // ------
@@ -26,9 +26,9 @@ const create = (baseURL = NetworkConstants.BASE_URL) => {
   const googleSignIn = (obj) => {
     return api.post(
       NetworkConstants.AUTH_SERVICE +
-        NetworkConstants.API +
-        NetworkConstants.ACTION_GOOGLE +
-        NetworkConstants.CONTROLLER_SIGNIN,
+      NetworkConstants.API +
+      NetworkConstants.ACTION_GOOGLE +
+      NetworkConstants.CONTROLLER_SIGNIN,
       obj
     );
   };
@@ -36,9 +36,9 @@ const create = (baseURL = NetworkConstants.BASE_URL) => {
   const googleSignUp = (obj) => {
     return api.post(
       NetworkConstants.AUTH_SERVICE +
-        NetworkConstants.API +
-        NetworkConstants.ACTION_GOOGLE +
-        NetworkConstants.CONTROLLER_SIGNUP,
+      NetworkConstants.API +
+      NetworkConstants.ACTION_GOOGLE +
+      NetworkConstants.CONTROLLER_SIGNUP,
       obj
     );
   };
@@ -46,9 +46,9 @@ const create = (baseURL = NetworkConstants.BASE_URL) => {
   const faceBookSignIn = (obj) => {
     return api.post(
       NetworkConstants.AUTH_SERVICE +
-        NetworkConstants.API +
-        NetworkConstants.FACEBOOK_CONTROLLER +
-        NetworkConstants.CONTROLLER_SIGNIN,
+      NetworkConstants.API +
+      NetworkConstants.FACEBOOK_CONTROLLER +
+      NetworkConstants.CONTROLLER_SIGNIN,
       obj
     );
   };
@@ -56,9 +56,9 @@ const create = (baseURL = NetworkConstants.BASE_URL) => {
   const validateToken = () => {
     return api.get(
       NetworkConstants.AUTH_SERVICE +
-        NetworkConstants.API +
-        NetworkConstants.TOKEN +
-        NetworkConstants.VALIDATE,
+      NetworkConstants.API +
+      NetworkConstants.TOKEN +
+      NetworkConstants.VALIDATE,
       {},
       { data: {} }
     );
@@ -67,9 +67,9 @@ const create = (baseURL = NetworkConstants.BASE_URL) => {
   const faceBookSignUp = (obj) => {
     return api.post(
       NetworkConstants.AUTH_SERVICE +
-        NetworkConstants.API +
-        NetworkConstants.FACEBOOK_CONTROLLER +
-        NetworkConstants.CONTROLLER_SIGNUP,
+      NetworkConstants.API +
+      NetworkConstants.FACEBOOK_CONTROLLER +
+      NetworkConstants.CONTROLLER_SIGNUP,
       obj
     );
   };
@@ -77,13 +77,35 @@ const create = (baseURL = NetworkConstants.BASE_URL) => {
   const logOutUser = () => {
     return api.get(
       NetworkConstants.AUTH_SERVICE +
-        NetworkConstants.API +
-        NetworkConstants.USERS +
-        NetworkConstants.SIGN_OUT,
+      NetworkConstants.API +
+      NetworkConstants.USERS +
+      NetworkConstants.SIGN_OUT,
       {},
       { data: {} }
     );
   };
+
+  const refreshToken = (obj) => {
+    removeUserHeader()
+    api.deleteHeader("Accept")
+    api.deleteHeader("Cache-Control")
+    removeAuthToken();
+    api.setHeader("Authorization", "Basic  " + NetworkConstants.BASICTK);
+    return api.post(
+      NetworkConstants.AUTH_SERVICE +
+      NetworkConstants.OAUTH +
+      NetworkConstants.REFRESH_TOKEN,
+      {
+        grant_type: "refresh_token",
+        refresh_token: obj
+      },
+      {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      }
+    )
+  }
 
   api.axiosInstance.interceptors.request.use(
     function (config) {
@@ -97,11 +119,45 @@ const create = (baseURL = NetworkConstants.BASE_URL) => {
     }
   );
 
+  api.axiosInstance.interceptors.response.use(response => {
+    return response;
+  }, error => {
+    const originalRequest = error.config;
+    if (!error.response) {
+      return Promise.reject('Network Error')
+    }
+    else if ((error.response.status === 401) && !originalRequest._retry) {
+      originalRequest._retry = true;
+      return refreshToken(localStorage.getItem('refresh_token'))
+        .then(data => {
+          //store new token
+          localStorage.setItem('user', JSON.stringify(data.data))
+          localStorage.setItem('refresh_token', JSON.stringify(data.refresh_token))
+
+          api.deleteHeader("Content-Type");
+          api.setHeader("Content-Type", "application/json");
+          api.setHeader("Accept", "application/json");
+          api.setHeader("Cache-Control", "no-cache");
+          removeAuthToken()
+          setUserIdHeader(data.userId)
+          setAuthToken(data.access_token);
+          originalRequest.headers['Authorization'] = `Bearer ${data.access_token}`;
+          originalRequest.headers['Content-Type'] =  "application/json";
+          return Promise.resolve(api.axiosInstance(originalRequest));
+        })
+        .catch((err) => {
+          Promise.reject(err);
+        })
+    } else {
+      Promise.reject(error);
+    }
+  });
+
   const getUserProfile = () => {
     return api.get(
       NetworkConstants.AUTH_SERVICE +
-        NetworkConstants.API +
-        NetworkConstants.CONTROLLER_USER_PROFILE,
+      NetworkConstants.API +
+      NetworkConstants.CONTROLLER_USER_PROFILE,
       {},
       { data: {} }
     );
@@ -110,8 +166,8 @@ const create = (baseURL = NetworkConstants.BASE_URL) => {
   const updateUserProfile = (data) => {
     return api.put(
       NetworkConstants.AUTH_SERVICE +
-        NetworkConstants.API +
-        NetworkConstants.CONTROLLER_USER_PROFILE,
+      NetworkConstants.API +
+      NetworkConstants.CONTROLLER_USER_PROFILE,
       data
     );
   };
