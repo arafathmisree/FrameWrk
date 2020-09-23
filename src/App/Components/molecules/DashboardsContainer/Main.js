@@ -5,7 +5,7 @@ function Main(props) {
     const { children, crumbs } = props
   return (
     <main className="h-full overflow-y-auto">
-      <div className="container grid px-6 mx-auto">
+      <div className="container grid px-6">
           <Breadcrumb crumbs={crumbs}/>
           {children}
           </div>

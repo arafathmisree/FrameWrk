@@ -90,7 +90,7 @@ const create = (baseURL = NetworkConstants.BASE_URL) => {
     api.deleteHeader("Accept")
     api.deleteHeader("Cache-Control")
     removeAuthToken();
-    api.setHeader("Authorization", "Basic  " + NetworkConstants.BASICTK);
+    api.setHeader("Authorization", "Basic " + NetworkConstants.BASICTK);
     return api.post(
       NetworkConstants.AUTH_SERVICE +
       NetworkConstants.OAUTH +
@@ -146,6 +146,7 @@ const create = (baseURL = NetworkConstants.BASE_URL) => {
           return Promise.resolve(api.axiosInstance(originalRequest));
         })
         .catch((err) => {
+          console.log('refreshToken request error');
           Promise.reject(err);
         })
     } else {
