@@ -142,7 +142,8 @@ const create = (baseURL = NetworkConstants.BASE_URL) => {
           setUserIdHeader(data.userId)
           setAuthToken(data.access_token);
           originalRequest.headers['Authorization'] = `Bearer ${data.access_token}`;
-          return api.axiosInstance(originalRequest);
+          originalRequest.headers['Content-Type'] =  "application/json";
+          return Promise.resolve(api.axiosInstance(originalRequest));
         })
         .catch((err) => {
           Promise.reject(err);
